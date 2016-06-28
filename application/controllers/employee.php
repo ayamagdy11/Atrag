@@ -227,6 +227,8 @@ class employee extends CI_Controller {
          $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
           $customer_phone2, $customer_phone1, $source, $form_type,$employee_id
          );
+                header('location:' . $this->config->base_url() . 'employee/offersform');
+
          }
          else{
                         $this->load->view('Employees/login_view');
@@ -234,7 +236,6 @@ class employee extends CI_Controller {
  
 
     
-        header('location:' . $this->config->base_url() . 'employee/offersform');
     }
 
 
@@ -280,13 +281,13 @@ class employee extends CI_Controller {
          $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
           $customer_phone2, $customer_phone1, $source, $form_type,$employee_id
          );
+        header('location:' . $this->config->base_url() . 'employee/demandsform');
 
          }
          else{
                         $this->load->view('Employees/login_view');
          }
        
-        header('location:' . $this->config->base_url() . 'employee/demandsform');
 
        
 
@@ -474,17 +475,18 @@ class employee extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
             
         $employee_id =$session_data['id'];
-         }
-         else{
-            $this->load->view('Employees/login_view');
-         }
-        $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
+         $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
          $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
          $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
           $customer_phone2, $customer_phone1, $source, $form_type,$employee_id,$custid
          );
 
         header('location:' . $this->config->base_url() . 'employee/offersform');
+         }
+         else{
+            $this->load->view('Employees/login_view');
+         }
+       
 
 
 
@@ -530,17 +532,18 @@ public function updatedemand(){
             $session_data = $this->session->userdata('logged_in');
             
         $employee_id =$session_data['id'];
-         }
-         else{
-            $this->load->view('Employees/login_view');
-         }
-        $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
+         $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
          $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
          $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
           $customer_phone2, $customer_phone1, $source, $form_type,$employee_id,$custid
          );
-
         header('location:' . $this->config->base_url() . 'employee/demandsform');
+
+         }
+         else{
+            $this->load->view('Employees/login_view');
+         }
+       
 
 
 
