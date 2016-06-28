@@ -185,7 +185,7 @@ color:#AAABAE;}
     margin: 0;
     font-size: 12px;
     border-bottom: 1px solid rgba(69, 74, 84, 0.7);
-    padding: 4px;
+    padding: 0px;
 }
 
 #menu li ul {
@@ -640,6 +640,33 @@ $colors: #E74C3C, #0072B5, #2C3E50;
   transition: all .3s;  
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden; /* Chrome and Safari */
-  -moz-backface-visibility:hidden; /* Firefox */
-  -ms-backface-visibility:hidden; /* Internet Explorer */
+  /*-moz-backface-visibility:hidden; /* Firefox */
+ /* -ms-backface-visibility:hidden; /* Internet Explorer */
+/*}*/
+.toolbar h2 {
+    position: absolute;
+    left: 61px;
+    top: -3%;
+    font-size: 49px;
+    /* font-family: 'Conv_BFantezy' !important; */
+    color: #102B44;
+    font-family: 'Conv_Diwanltr';
+       text-shadow: 0px 2px 3px #F58220;
+}
+.alert {
+    background: #4CAF50;
+    color: #fff;
+    position: absolute;
+    width: 167px;
+}
+button.sendpermission {
+    margin-right: 20px;
+    width: 126px;
+    background: #FF9800;
+    border: none;
+    color: #fff;
+    padding: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
 }

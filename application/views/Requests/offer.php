@@ -203,12 +203,18 @@
 					  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button> 
 						<h3><strong>تعديل بيانات</strong></h3>
 					</div>
-				<form action="<?php echo $this->config->base_url(); ?>employee/addoffer" method="post">
+				<form action="<?php echo $this->config->base_url(); ?>employee/updateoffer" method="post">
 						<div class="modal-body ">
 					<div class="form-group formLayout">
 						<label for="date" class="control-label " >التاريخ: </label>
 						 <input type="text" id="edate" name="date"  class="form-control" placeholder="" />
 					</div> 
+
+
+
+						<div class="form-group formLayout">
+						 <input type="hidden" id="custid" name="custid"  class="form-control" placeholder="" />
+					</div>
 							<div class="form-group formLayout">
 								<label for="erequesttype" class="control-label ">نوع الطلب: </label>
 									<select class="form-control" name="erequesttype" id="erequesttype" > 
@@ -399,7 +405,7 @@
 						<div class="modal-body">
 							<div class="form-group formLayout" id="formlayout">   
 								  <label for="nameInput" class="control-label ">هل أنت متأكد من حذف البيانات</label>
-								 <input type="text" name="delete_offerid" id="delete_offerid" class="form-control" readonly/>
+								 <input type="hidden" name="delete_offerid" id="delete_offerid" class="form-control" readonly/>
 
 							</div>  
 						</div>
@@ -456,6 +462,8 @@
                                                                      data-finishing='".$offers[$i]->finishing_id."'
                                                                      data-wayofpay='".$offers[$i]->way_of_pay_id."'
                                                                      data-request_type='".$offers[$i]->request_type."'
+
+                                                                     data-custid='".$offers[$i]->custid."'
 
                 													 data-commission='".$offers[$i]->commission."'
                                                                      data-area1='".$offers[$i]->area1."'
@@ -544,7 +552,7 @@ $(document).on("click",".edit-offer",function () {
     var customer_phone2=$(this).data('customer_phone2');
     var source=$(this).data('source');
     var employee_id=$(this).data('employee_id');
-
+    var custid=$(this).data('custid');
 
 
     var finishing=$(this).data('finishing');
@@ -588,6 +596,7 @@ $(document).on("click",".edit-offer",function () {
     $("#erequesttype").val(request_type);
     $("#epay").val(wayofpay);
     $("#efinishing").val(finishing);
+    $("#custid").val(custid);
 
 
 });

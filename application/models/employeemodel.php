@@ -11,7 +11,8 @@ class EmployeeModel extends CI_Model {
     }
 
     //insert into employee table
-    public function AddEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id) {
+    public function AddEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from,
+     $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id,$position) {
 
         $data = array(
             'name' => $name,
@@ -30,7 +31,7 @@ class EmployeeModel extends CI_Model {
             'date_of_birth' => $birthDate,
             'employee_id' => $id,
             'gender_id' => $gender,
-            'position_id' => 1
+            'position_id' => $position
         );
 
         $this->db->insert('employee', $data);
@@ -83,6 +84,58 @@ class EmployeeModel extends CI_Model {
 
     }
 
+
+
+    public function updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
+         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, 
+         $notes,$finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $customer_job,
+          $customer_phone2, $customer_phone1, $source, $form_type ,$employee_id,$custid
+         )
+       {
+      
+        $data = array(
+            'date' => $date,
+            'request_type' => $request_type,
+            'way_of_pay_id' => $way_of_pay,
+            'purpose' => $purpose,
+            'period' => $period,
+            'commission' => $commission,
+            'area1' => $area1,
+            'area2' => $area2,
+            'area3' => $area3,
+            'area4' => $area4,
+            'size' => $size,
+            'floors' => $floors,
+            'rooms' => $rooms,
+            'reception' => $reception,
+            'bathroom' => $bathroom,
+            'notes' => $notes,
+            'finishing_id' => $finishing_id,
+
+            'check_date1' => $check_date1,
+            'check_date2' => $check_date2,
+            'check_date3' => $check_date3,
+            'extra' => $extra,
+            'customer_name' => $customer_name,
+            'customer_job' => $customer_job,
+            'customer_phone2' => $customer_phone2,
+            'customer_phone1' => $customer_phone1,
+            'source' => $source,
+            'form_type' => $form_type,
+            'employee_id'=>$employee_id,
+
+
+            
+
+
+        );
+         $this->db->where('id', $custid);
+        $this->db->update('customer', $data);
+      //  $this->db->insert('customer', $data);
+
+
+
+    }
     //get employee data from db
     public function employeedata($id) {
         $this->db->select('*');
@@ -96,7 +149,8 @@ class EmployeeModel extends CI_Model {
         return $result;
     }
 
-    public function updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id) {
+    public function updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, 
+        $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id,$empid,$position) {
 
         $data = array(
             'name' => $name,
@@ -113,11 +167,13 @@ class EmployeeModel extends CI_Model {
             'password' => $password,
             'address' => $address,
             'date_of_birth' => $birthDate,
-            'employee_id' => $id,
+            // 'employee_id' => $id,
             'gender_id' => $gender,
+             'position_id'=>$position
+
             
         );
-        $this->db->where('id', '1');
+        $this->db->where('id', $empid);
         $this->db->update('employee', $data);
     }
 
@@ -135,15 +191,13 @@ class EmployeeModel extends CI_Model {
     // }
 
     public function alldemands_query($form_type) {
-        $this->db->select('*');
-        $this->db->from('customer');
-        $this->db->join('employee', 'employee.id = customer.employee_id', 'left outer');
-         $this->db->where('form_type', $form_type);
-        $query = $this->db->get();
+     $query = $this->db->query("SELECT c.id AS custid,c . *,e . *
+        FROM customer AS c
+        INNER JOIN employee AS e ON ( e.id = c.employee_id )
+        WHERE (
+        c.form_type =$form_type
+        )");
         $result = $query->result();
-      //  print_r($result) ;
-        //echo "<br>";
-        //echo($result[0]->name) ;
         return $result;
     }
 

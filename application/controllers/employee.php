@@ -18,7 +18,9 @@ class employee extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('Employees/AddEmployee');
+        $data['position'] = $this->EmployeeModel->position_query();
+        $data['types'] = $this->EmployeeModel->type_query();
+        $this->load->view('Employees/AddEmployee',$data);
     }
 
 //employee table 
@@ -78,11 +80,15 @@ class employee extends CI_Controller {
         $gender = $this->input->post('gender');
         $password = $this->input->post('password');
         $zkt_id = $this->input->post('zkt_id');
+        $position=$this->input->post('position');
+        $department=$this->input->post('department');
 
 
         $type = $this->input->post('department');
 
-        $this->EmployeeModel->AddEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id);
+        $this->EmployeeModel->AddEmployee_query($name, $email, $birthDate, $address,
+         $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract,
+          $type, $gender, $password, $zkt_id,$position,$department);
 
         header('location:' . $this->config->base_url() . 'index.php/employee');
     }
@@ -112,10 +118,13 @@ class employee extends CI_Controller {
         $gender = $this->input->post('gender');
         $password = $this->input->post('password');
         $zkt_id = $this->input->post('zkt_id');
-
+        $empid = $this->input->post('id');
         $type = $this->input->post('department');
+        $position=$this->input->post('position');
 
-        $this->EmployeeModel->updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id);
+        $this->EmployeeModel->updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, 
+            $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, 
+            $password, $zkt_id,$empid,$type,$position);
 
         header('location:' . $this->config->base_url() . 'employee/showemployee');
     }
@@ -168,10 +177,13 @@ class employee extends CI_Controller {
     }
 
        public function demandsform(){
-                $form_type = 1;
+        $form_type = 1;
         //$data['students'] = $this->update_model->show_students();
         $data['demands'] = $this->EmployeeModel->alldemands_query($form_type);
         $employee_id = $data['demands'][0]->employee_id;
+        $data['request_type'] = $this->EmployeeModel->request_type();
+        $data['finishing'] = $this->EmployeeModel->finishing();
+        $data['way_of_pay'] = $this->EmployeeModel->way_of_pay();
         //$data['employee_name'] = $this->EmployeeModel->employeename($employee_id);
         $this->load->view('Requests/demand', $data);
          // $this->load->view('Requests/demand');
@@ -209,8 +221,15 @@ class employee extends CI_Controller {
         $customer_phone1 = $this->input->post('tele1');
         $source = $this->input->post('source');
         $form_type=0;//offers && demands=1
-        $employee_id = 1;
 
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            
+        $employee_id =$session_data['id'];
+         }
+         else{
+                        $this->load->view('Employees/login_view');
+         }
         $this->EmployeeModel->Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period,
          $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
          $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
@@ -222,7 +241,7 @@ class employee extends CI_Controller {
     }
 
      public function adddemand(){
-        $date=$this->input->post('date');
+    $date=$this->input->post('date');
         $request_type = $this->input->post('requesttype');
         $way_of_pay = $this->input->post('pay');
         $purpose = $this->input->post('purpose');
@@ -250,16 +269,22 @@ class employee extends CI_Controller {
         $customer_phone1 = $this->input->post('tele1');
         $source = $this->input->post('source');
         $form_type=1;//offers && demands=1
-        $employee_id = 1;
 
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            
+        $employee_id =$session_data['id'];
+         }
+         else{
+                        $this->load->view('Employees/login_view');
+         }
         $this->EmployeeModel->Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period,
          $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
          $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
           $customer_phone2, $customer_phone1, $source, $form_type,$employee_id
          );
 
-        header('location:' . $this->config->base_url() . 'employee/offersform');
-         
+        header('location:' . $this->config->base_url() . 'employee/demandsform');
     }
 
    
@@ -271,6 +296,13 @@ class employee extends CI_Controller {
     }
 
     public function deleteoffer() {
+        $id = $this->input->post('delete_offerid');
+         echo $id;
+        $del_result = $this->EmployeeModel->Deleteoffer_query($id);
+        header('location:' . $this->config->base_url() . 'employee/offersform');
+    }
+        public function deletedemand() {
+
         $id = $this->input->post('delete_offerid');
          echo $id;
         $del_result = $this->EmployeeModel->Deleteoffer_query($id);
@@ -402,6 +434,120 @@ class employee extends CI_Controller {
         $_overPrice = $this->input->post('overtime_money');
         $this->TimemangeModel->editComm($_overTime, $_overPrice, $id);
         header('location:' . $this->config->base_url() . 'employee/Commission');
+    }
+
+    public function updateoffer(){
+        $date=$this->input->post('edate');
+        $request_type = $this->input->post('erequesttype');
+        $way_of_pay = $this->input->post('epay');
+        $purpose = $this->input->post('epurpose');
+        $period = $this->input->post('eperiod');
+        $commission = $this->input->post('ecommision');
+        $area1 = $this->input->post('eAreas1');
+        $area2 = $this->input->post('eAreas2');
+        $area3 = $this->input->post('eAreas3');
+        $area4 = $this->input->post('eAreas4');
+        $size = $this->input->post('esize');
+        $floors = $this->input->post('efloors');
+        $rooms = $this->input->post('erooms');
+        $reception = $this->input->post('ereception');
+        $bathroom = $this->input->post('ebathroom');
+        $notes = $this->input->post('enote');
+        $finishing_id = $this->input->post('efinishing');
+        $check_date1 = $this->input->post('edate1');
+        $check_date2 = $this->input->post('edate2');
+        $check_date3 = $this->input->post('edate3');
+        $extra = $this->input->post('enotes');
+
+        $customer_name = $this->input->post('ename');
+        $job = $this->input->post('ejob');
+        $customer_phone2 = $this->input->post('etele2');
+        $customer_phone1 = $this->input->post('etele1');
+        $source = $this->input->post('esource');
+        $form_type=0;//offers && demands=1
+
+        $custid=$this->input->post('custid');
+
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            
+        $employee_id =$session_data['id'];
+         }
+         else{
+            $this->load->view('Employees/login_view');
+         }
+        $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
+         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
+         $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
+          $customer_phone2, $customer_phone1, $source, $form_type,$employee_id,$custid
+         );
+
+        header('location:' . $this->config->base_url() . 'employee/offersform');
+
+
+
+
+    }
+
+
+
+
+public function updatedemand(){
+        $date=$this->input->post('edate');
+        $request_type = $this->input->post('erequesttype');
+        $way_of_pay = $this->input->post('epay');
+        $purpose = $this->input->post('epurpose');
+        $period = $this->input->post('eperiod');
+        $commission = $this->input->post('ecommision');
+        $area1 = $this->input->post('eAreas1');
+        $area2 = $this->input->post('eAreas2');
+        $area3 = $this->input->post('eAreas3');
+        $area4 = $this->input->post('eAreas4');
+        $size = $this->input->post('esize');
+        $floors = $this->input->post('efloors');
+        $rooms = $this->input->post('erooms');
+        $reception = $this->input->post('ereception');
+        $bathroom = $this->input->post('ebathroom');
+        $notes = $this->input->post('enote');
+        $finishing_id = $this->input->post('efinishing');
+        $check_date1 = $this->input->post('edate1');
+        $check_date2 = $this->input->post('edate2');
+        $check_date3 = $this->input->post('edate3');
+        $extra = $this->input->post('enotes');
+
+        $customer_name = $this->input->post('ename');
+        $job = $this->input->post('ejob');
+        $customer_phone2 = $this->input->post('etele2');
+        $customer_phone1 = $this->input->post('etele1');
+        $source = $this->input->post('esource');
+        $form_type=1;//offers && demands=1
+
+        $custid=$this->input->post('custid');
+
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            
+        $employee_id =$session_data['id'];
+         }
+         else{
+            $this->load->view('Employees/login_view');
+         }
+        $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
+         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
+         $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
+          $customer_phone2, $customer_phone1, $source, $form_type,$employee_id,$custid
+         );
+
+        header('location:' . $this->config->base_url() . 'employee/demandsform');
+
+
+
+
+    }
+
+  public function deal(){
+        $this->load->view('Deal/deal');
+
     }
 
 }

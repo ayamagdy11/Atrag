@@ -62,16 +62,6 @@
 					</div>
 
 					<div class="form-group formLayout">
-						<label for="subtraction_rate" class="control-label " >النسبه المئويه للخصم للتأخير: </label>
-						 <input type="text" id="subtraction_rate" name="subtraction_rate"  class="form-control" placeholder=" " />
-					</div>
-
-					<div class="form-group formLayout">
-						<label for="overtime_rate" class="control-label " >النسبه المثويه للوقت الزياده بعد العمل: </label>
-						 <input type="text" id="overtime_rate" name="overtime_rate"  class="form-control" placeholder=" " />
-					</div>
-
-					<div class="form-group formLayout">
 						<label for="cust_fromdate" class="control-label " >مواعيد العمل </label><br>
 						<label for="cust_fromdate" class="control-label " >من: </label>
 						 <input type="text" id="emp_fromdate" name="emp_fromdate"  class="form-control" placeholder=" " />
@@ -93,33 +83,45 @@
 				</div>
 
 				
-				<div class=" col-md-5">
+			<div class=" col-md-5">
 					<div class="form-group formLayout profile">
-							<img src="../_/images/profile1.jpg" alt="profile" class="profil_img"><br>
-							<input type="file" name="profile"  class="image-upload btn btn-default btn-add-photo btn-xs camerabutton" >							
-						</div><br>
+						<img src="../_/images/profile1.jpg" alt="profile" class="profil_img" id="img"><br>
+							<input type="file" name="profile" id="image-source" onchange="previewImage();" class="image-upload btn btn-default btn-add-photo btn-xs camerabutton" > 						
+<!-- 						     <img src="../_/images/profile1.jpg" alt="profile" class="profil_img"><br>
+ -->						</div><br>
 
 
 						<div class="form-group formLayout profile">
 <!-- 							<img src="../_/images/profile1.jpg" alt="profile" class="profil_img"><br>
- -->							<input type="file" name="contract"  class="image-upload btn btn-default btn-add-photo btn-xs camerabutton" >							
+ -->							<input type="file" name="contract" id="contract"  class="image-upload btn btn-default btn-add-photo btn-xs camerabutton" >							
+						<input type="hidden" id="file">
+						<input value="Download"type="button" id="download">
 						</div><br>
 
 							<div class="form-group formLayout">
 								<label for="department" class="control-label ">القسم: </label>
-									<select class="form-control" name="department" > 
-										    <option value="1"> تسويق </option> 
-										    <option value="2"> مدير التسويق </option> 
-										    <option value="3"> خدمه عملاء </option> 
-										    <option value="4"> مدير </option> 
+
+									<select class="form-control" name="department" id="emp_dept"> 
+											  <?php
+										
+											   foreach ($types as $value) {
+                                           echo '<option value="'.$value->id.'">'.$value->department.'</option>';									     	$x++;
+									     	}
+										    ?>
+
+										
 									 </select>
 							</div>
 
 
 							<div class="form-group formLayout">
 								<label for="position" class="control-label ">position: </label>
+							
 									<select class="form-control" name="position" > 
-										    <option value=""> إختر </option> 
+										  <?php foreach ($position as $value) {
+                                           echo '<option value="'.$value->id.'">'.$value->name.'</option>';									     	$x++;
+									     	}
+										    ?>
 									 </select>
 							</div>
 				</div>
@@ -134,6 +136,17 @@
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
 <?php $this->load->view('Scripts');?>
+<script>
+	function previewImage() {
+    document.getElementById("img").style.display = "block";
+    var oFReader = new FileReader();
+     oFReader.readAsDataURL(document.getElementById("image-source").files[0]);
+ 
+    oFReader.onload = function(oFREvent) {
+      document.getElementById("img").src = oFREvent.target.result;
+    };
+  };
+  </script>
 	</body>
 </html>
      <?php }?>
