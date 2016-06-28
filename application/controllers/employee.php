@@ -288,7 +288,7 @@ class employee extends CI_Controller {
                         $this->load->view('Employees/login_view');
          }
        
-
+}
        
 
     public function deleteemployee() {
