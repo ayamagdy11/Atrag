@@ -29,7 +29,7 @@ class VerifyLogin extends CI_Controller {
                 if ($session_data['type_id'] == '4') {
                     header('location:' . $this->config->base_url() . 'employee');
                 } else {
-                    $this->load->view('MenuBar');
+                    header('location:' . $this->config->base_url() . 'employee');
                 }
             }
 

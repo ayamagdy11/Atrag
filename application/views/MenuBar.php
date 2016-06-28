@@ -6,7 +6,7 @@
 	          <?php if ($this->session->userdata('logged_in')) {
                     $session_data = $this->session->userdata('logged_in'); ?>   
                     <h4><?php echo $session_data['username']; ?> </h4>
-<?php } ?>
+
 	
 	<!--span id="logo" class="fa fa-html5 fa-5x"></span--> 
       <!--<img id="logo" src="" alt="Logo"/>--> 
@@ -15,8 +15,12 @@
     <div class="menu">
       <ul id="menu" >
         <li id="menu-home" ><a href="#"><i class="fa fa-home"></i><span>الصفحة الرئيسية</span></a></li>
+        <?php if($session_data['type_id']=='4'){?>
         <li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/Inbox"><i class="fa fa-envelope"></i><span>الرسائل الواردة</span><!--span class="fa fa-angle-double-right" style="float: right"></span--></a>          <!--ul id="menu-comunicacao-sub" >
-          
+                  <?php } ?>
+                      
+
+
           <!--ul id="menu-comunicacao-sub" >
             <!--li id="menu-mensagens" style="width: 120px" ><a href="#">الخزنة<!--i class="fa fa-angle-right" style="float: right; margin-right: -8px; margin-top: 2px;"></i--><!--/a>
               <!--ul id="menu-mensagens-sub" >
@@ -60,10 +64,13 @@
 		</li>
    
         <li><a href="<?php echo $this->config->base_url(); ?>employee/Department"><i class="fa fa-list-ul" aria-hidden="true"></i><span>الاقسام</span></a></li>
+                <?php if($session_data['type_id']=='1' ||$session_data['type_id']=='2' ||$session_data['type_id']=='3' ){?>
+
 		<li><a href="<?php echo $this->config->base_url(); ?>employee/Request"><i class="fa fa-list-ul" aria-hidden="true"></i><span>الطلبات</span></a></li>
-	
+                <?php }?>
         <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i><span>المسمي الوظيفي</span></a></li>
       </ul>
     </div>
   </div>
 </div>
+    <?php } ?>

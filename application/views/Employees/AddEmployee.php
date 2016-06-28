@@ -8,9 +8,9 @@
 	<body>
 
           <?php
-        if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            if ($session_data['type_id'] == '4') {
+//        if ($this->session->userdata('logged_in')) {
+//            $session_data = $this->session->userdata('logged_in');
+//            if ($session_data['type_id'] == '4') {
                 ?>
 	
 	<!--------------------------------------------------------------menubar---------------------------------------------------------------->
@@ -149,5 +149,5 @@
   </script>
 	</body>
 </html>
-     <?php }?>
-        <?php }?>
+     <?php //}?>
+        <?php //}?>

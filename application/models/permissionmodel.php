@@ -14,6 +14,23 @@ class PermissionModel extends CI_Model {
     public function addPermission($data) {
         $this->db->insert('permission', $data);
     }
+    
+    public function getRespondingRequest($id){
+        
+         $this->db->select('manager_reply');
+        $this->db->from('permission');
+        $this->db->where('employee_id', $id);
+        $this->db->limit(1);
+
+        $query = $this->db->get();
+        if ($query->num_rows() == 1) {
+            return $query->result();
+        } else {
+            return false;
+        }
+         
+    }
+    
 
 }
 
