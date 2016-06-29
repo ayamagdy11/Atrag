@@ -16,10 +16,10 @@
       <ul id="menu" >
         <li id="menu-home" ><a href="#"><i class="fa fa-home"></i><span>الصفحة الرئيسية</span></a></li>
         <?php if($session_data['type_id']=='4'){?>
-        <li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/Inbox"><i class="fa fa-envelope"></i><span>الرسائل الواردة</span><!--span class="fa fa-angle-double-right" style="float: right"></span--></a>          <!--ul id="menu-comunicacao-sub" >
-                  <?php } ?>
+        <li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/Inbox"><i class="fa fa-envelope"></i><span>الرسائل الواردة</span>
+                  <?php }else{ ?><li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/employeeInbox"><i class="fa fa-envelope"></i><span>الرسائل الواردة</span>
                       
-
+                  <?php }?>
 
           <!--ul id="menu-comunicacao-sub" >
             <!--li id="menu-mensagens" style="width: 120px" ><a href="#">الخزنة<!--i class="fa fa-angle-right" style="float: right; margin-right: -8px; margin-top: 2px;"></i--><!--/a>

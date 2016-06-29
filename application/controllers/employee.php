@@ -284,7 +284,7 @@ class employee extends CI_Controller {
 
     //sarah
     public function Inbox() {
-        $this->load->view('Inbox/inbox');
+        header('location:' . $this->config->base_url() . 'employee/sendRequest');
     }
 
     public function Discounts() {
@@ -346,37 +346,56 @@ class employee extends CI_Controller {
     }
 
     public function tookpermission() {
-        $id = $this->input->post('id');
-        //var_dump($id);
-        $from = $this->input->post('from');
-        $to = $this->input->post('to');
-        $dtFrom = date('Y-m-d H:i:s', strtotime($from));
-        //var_dump($dtFrom);
+        //  $id = $this->input->post('id');
 
-        $dtTo = date('Y-m-d H:i:s', strtotime($to));
-        // var_dump($dtTo);
-        // die();
-        if ($from > $to) {
-            // die('mm');
-            echo"can't insert";
-            $this->form_validation->set_message('check_date', 'الوقت من لابد ان يكون اصغر من وقت الي');
-        } else {
-            // die('sarah');
-            $data['date_to'] = $dtTo;
-            $data['date_from'] = $dtFrom;
-            $data['employee_id'] = $id;
-            // var_dump($data);
-            $this->PermissionModel->addPermission($data);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+            // var_dump($id);
+            $from = $this->input->post('from');
+            $to = $this->input->post('to');
+            $dtFrom = date('Y-m-d H:i:s', strtotime($from));
+            //var_dump($dtFrom);
 
-            echo 'تم اضافه الاذن بنجاح انتظر موافقه المدير';
+            $dtTo = date('Y-m-d H:i:s', strtotime($to));
+            // var_dump($dtTo);
+            // die();
+            if ($from > $to) {
+                // die('mm');
+                echo"can't insert";
+                $this->form_validation->set_message('check_date', 'الوقت من لابد ان يكون اصغر من وقت الي');
+            } else {
+                // die('sarah');
+                $data['date_to'] = $dtTo;
+                $data['date_from'] = $dtFrom;
+                $data['employee_id'] = $id;
+                // var_dump($data);
+                $this->PermissionModel->addPermission($data);
 
+                echo 'تم اضافه الاذن بنجاح انتظر موافقه المدير';
 
-            //if new data enter in database get all data if manger response =0 and add notifications +1
-            //when manger open find new message with data from databases 
-            //select permission of this employee id manger response =0
-            $result=$this->PermissionModel->getRespondingRequest($id);
-            var_dump($result);
+                //  header('location:' . $this->config->base_url() . 'employee/sendRequest');
+            }
         }
+    }
+
+    public function sendRequest() {
+
+        //if new data enter in database get all data if manger response =0 and add notifications +1
+        //when manger open find new message with data from databases 
+        //select permission of this employee id manger response =0
+        $data['count'] = $this->PermissionModel->countRequest();
+        $data['requests'] = $this->PermissionModel->getRespondingRequest();
+//        if ($result) {
+//            foreach ($result as $row) {
+//                $mangerReply['replay'] = $row->manager_reply;
+//                $mangerReply['date_to'] = $row->date_to;
+//                $mangerReply['date_from'] = $row->date_from;
+//            }
+        $this->load->view('Inbox/inbox', $data);
+
+        //  $this->load->view('toolbar.php', $mangerReply);
+//        }
     }
 
     public function editCommission() {
@@ -385,6 +404,44 @@ class employee extends CI_Controller {
         $_overPrice = $this->input->post('overtime_money');
         $this->TimemangeModel->editComm($_overTime, $_overPrice, $id);
         header('location:' . $this->config->base_url() . 'employee/Commission');
+    }
+
+    //to agree request from manger edit data base with 1 at this employee id and add another column with agrement or refuse
+    public function agreeRequest() {
+        $id = $this->input->post('employeeid');
+        $this->EmployeeModel->editRequest($id);
+        $this->EmployeeModel->addAgreement($id);
+    }
+
+    public function RefuseRequest() {
+        $id = $this->input->post('employeeid');
+        $this->EmployeeModel->RefuseRequest($id);
+    }
+
+    public function employeeInbox() {
+        header('location:' . $this->config->base_url() . 'employee/recevieRequest');
+    }
+
+//recieve request to employee inbox where id is for employee
+    public function recevieRequest() {
+
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+            $data['count'] = $this->PermissionModel->countemployeeRequest($id);
+            $data['replays'] = $this->PermissionModel->getRecievedRequest($id);
+            $this->load->view('Inbox/UserInbox', $data);
+        }
+    }
+
+    //when employee read msg it will be appear again in notification bar
+    //update table employee and make readmessage=1
+    public function readMsg() {
+        $employeeId = $this->input->post('employeeid');
+        var_dump($employeeId);
+        $msgId = $this->input->post('msgid');
+        var_dump($msgId);
+        $this->PermissionModel->readMsg($employeeId,$msgId);
     }
 
 }
