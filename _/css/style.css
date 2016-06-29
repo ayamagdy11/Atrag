@@ -312,9 +312,9 @@ color:#AAABAE;}
     /* padding-top: 19px; */
     padding-right: 21px;
 }
-.toolbar .fa {
+.toolbar .fa-bell {
     position: absolute;
-    right: 30%;
+    right: 35%;
     top: 23px;
     font-size: 23px;
 }
@@ -411,7 +411,7 @@ table.pure-table.table-responsive.tabdetails {
 }
 .toolbar .notifications {
     position: absolute;
-    right: 375px;
+    right: 438px;
     top: 7px;
     background: red;
     padding: 4px;
@@ -419,6 +419,31 @@ table.pure-table.table-responsive.tabdetails {
     font-size: 11px;
     font-weight: bold;
     border-radius: 10px;
+}
+.logout {
+    position: absolute;
+    right: 27%;
+    top: 20px;
+    font-size: 22px;
+}
+.toolbar .fa-envelope {
+    position: absolute;
+    right: 42%;
+    top: 24px;
+    font-size: 22px;
+}
+.mail {
+    position: absolute;
+    right: 68%;
+    background: red;
+    border-radius: 50%;
+    padding: 1px;
+    font-size: 17px;
+    width: 23px;
+    top: 14px;
+    height: 21px;
+    padding-right: 4px;
+    color: #fff;
 }
 table.pure-table.table-responsive.tabdetails tr th {
     border: 1px solid #ccc;
@@ -669,4 +694,56 @@ button.sendpermission {
     font-size: 18px;
     font-weight: bold;
     border-radius: 10px;
+}
+.personaldetails {
+    float: right;
+    margin-right: 19%;
+    width: 30%;
+    margin-bottom: 36px !important;
+    margin-top: 37px;
+}
+button.cashsubmit {
+    background: #FF9800;
+    border: none;
+    width: 88px;
+    font-weight: bold;
+    margin-left: 10px;
+    height: 31px;
+    border-radius: 10px;
+    color: #fff;
+}
+button#cashingprint {
+    background: #03A9F4;
+    border: none;
+    width: 88px;
+    font-weight: bold;
+    margin-left: 10px;
+    height: 31px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+button.recievesubmit {
+    background: #FF9800;
+    border: none;
+    width: 88px;
+    font-weight: bold;
+    margin-left: 10px;
+    height: 31px;
+    border-radius: 10px;
+    color: #fff;
+}
+button.printrecieve {
+    background: #03A9F4;
+    border: none;
+    width: 88px;
+    font-weight: bold;
+    margin-left: 10px;
+    height: 31px;
+    border-radius: 10px;
+    color: #fff;
+}
+.selectemployee {
+    width: 81%;
+    margin-right: 15px;
 }

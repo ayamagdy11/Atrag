@@ -293,6 +293,38 @@ class EmployeeModel extends CI_Model {
         $result = $query->result();
         return $result;
     }
+
+
+    public function Adddeal_query($namebuyer, $nameseller, $ratebuyer, $rateseller,
+         $dealdate, $dealmoney,$dealcompanyrate, $dealemployeerate, $contract, $emp_id){
+           $data = array(
+            'buyer' => $namebuyer,
+            'seller' => $nameseller,
+            'buyer_rate' => $ratebuyer,
+            'saller_rate' => $rateseller,
+            'date' => $dealdate,
+            'total_deal_money' => $dealmoney,
+            'company_commission' => $dealcompanyrate,
+            'employee_commission' => $dealemployeerate,
+            'contract_of_deal' => $contract,
+            'employee_id' => $emp_id,
+        );
+
+        $this->db->insert('deal', $data);
+
+
+    }
+
+
+    public function deal()
+    {
+
+        $this->db->select('*');
+        $this->db->from('deal');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
 }
 
 ?>

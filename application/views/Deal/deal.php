@@ -6,7 +6,7 @@
 	<?php $this->load->view('Header');?>
 		</head>
 	<body>
-	<!------------------------Add Deal----------------->
+	<!------------------------Add Deal---------------->
 		<div class="modal fade" id="AddDeal">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -14,20 +14,10 @@
 					  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button> 
 						<h3><strong>أضف صفقة</strong></h3>
 					</div>
-					<form action="" method="post">
+					<form action="<?php echo $this->config->base_url(); ?>employee/adddeal" method="post" enctype="multipart/form-data">
 						<div class="modal-body ">
 					
-								<div class="row">
-									<div class="form-group formLayout col-md-3 col-md-offset-6" id="formlayout">
-											<label for="codeemployee" class="control-label "> كود الموظف:</label>
-											<input type="text" id="codeemployee" name="codeemployee" class="form-control" placeholder="">
-									</div>
-									<div class="form-group formLayout col-md-3 " id="formlayout">
-											<label for="code" class="control-label ">كود:</label>
-											<input type="text" id="code" name="code" class="form-control" placeholder="">
-									</div>
-								
-								</div>
+						
 								<div class="row">								
 								<div class="form-group formLayout col-md-6" id="formlayout">
 											<label for="namebuyer" class="control-label "> إسم البائع:</label>
@@ -41,11 +31,11 @@
 								</div>	
 								<div class="row">								
 								<div class="form-group formLayout col-md-6" id="formlayout">
-											<label for="ratebuyer" class="control-label "> نسبة من المشتري:</label>
+											<label for="ratebuyer" class="control-label "> النسبه المئويه من البائع:</label>
 											<input type="text" id="ratebuyer" name="ratebuyer" class="form-control" placeholder="">
 									</div>
 									<div class="form-group formLayout col-md-6 " id="formlayout">
-											<label for="rateseller" class="control-label ">نسبة من البائع:</label>
+											<label for="rateseller" class="control-label ">النسبه المئويه من المشتري :</label>
 											<input type="text" id="rateseller" name="rateseller" class="form-control" placeholder="">
 									</div>
 								
@@ -58,13 +48,25 @@
 								</div>
 								<div class="row">
 									<div class="form-group formLayout col-md-6 " id="formlayout">
+										<label for="dealmoney" class="control-label ">مبلغ التعاقد:</label>
+										<input type="text" id="dealmoney" name="dealmoney"  class="form-control" placeholder="" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group formLayout col-md-6 " id="formlayout">
 										<label for="dealcompanyrate" class="control-label ">نسبة الشركة من بييع:</label>
 										<input type="text" id="dealcompanyrate" name="dealcompanyrate"  class="form-control" placeholder="" />
 									</div>	
 									<div class="form-group formLayout col-md-6 " id="formlayout">
-										<label for="dealmoney" class="control-label ">مبلغ التعاقد:</label>
-										<input type="text" id="dealmoney" name="dealmoney"  class="form-control" placeholder="" />
+										<label for="dealemployeerate" class="control-label ">نسبة الشركة من بييع:</label>
+										<input type="text" id="dealemployeerate" name="dealemployeerate"  class="form-control" placeholder="" />
 									</div>
+								
+								</div>
+									<div class="row">
+										<div class="form-group formLayout col-md-12">
+										<input type="file" name="contract" >							
+						</div>
 								</div>
 								
 						</div>
@@ -80,7 +82,7 @@
 	
 		
    
-	<!--------------------------------------------------------------menubar----------------------------------------->
+	<!--------------------------------------------------------------menubar---------------------------------------->
 		<div class="menubar">
 			<div class="row">
 				<?php $this->load->view('toolbar'); ?>
@@ -112,14 +114,21 @@
 								<th>إسم المشتري</th>
 						
 							</thead>
-							<tbody>
-								<tr>
+							<?php
+							//print_r($deal);
+
+							 foreach ($deal as $value) {
+							
+							
+						echo'<tbody>';
+							echo"<tr>";
 								
-									<td>12-05-2016</td>
-									<td>محمد</td>
-									<td>احمد</td>
-								</tr>
-							</tbody>
+								echo"	<td>$value->date</td>";
+								echo"	<td>$value->seller</td>";
+								echo"	<td>$value->buyer</td>";
+								echo"</tr>";
+							echo"</tbody>";
+							}?>
 						</table>
 	
 					 

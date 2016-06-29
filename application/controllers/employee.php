@@ -32,7 +32,7 @@ class employee extends CI_Controller {
     public function upload_image() {
         $Empphoto = NULL;
         $config['upload_path'] = './_/images';
-        $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|bmp';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
         if (!$this->upload->do_upload('profile')) {
@@ -46,9 +46,9 @@ class employee extends CI_Controller {
     }
 
     public function upload_contract() {
-        $Empphoto = NULL;
+       $Empphoto = NULL;
         $config['upload_path'] = './_/images';
-        $config['allowed_types'] = 'jpg|jpeg|gif|png';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|bmp|odt|docx';
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
         if (!$this->upload->do_upload('contract')) {
@@ -63,7 +63,7 @@ class employee extends CI_Controller {
     }
 
     public function insertemployee() {
-        //echo "aya";
+        //echo "aya"; 
         $name = $this->input->post('emp_name');
         $email = $this->input->post('emp_email');
         $birthDate = $this->input->post('emp_birthdate');
@@ -89,7 +89,7 @@ class employee extends CI_Controller {
          $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract,
           $type, $gender, $password, $zkt_id,$position,$department);
 
-        header('location:' . $this->config->base_url() . 'index.php/employee');
+        header('location:' . $this->config->base_url() . 'employee');
     }
 
     public function editemployee() {
@@ -128,47 +128,21 @@ class employee extends CI_Controller {
         header('location:' . $this->config->base_url() . 'employee/showemployee');
     }
 
-    //customer table
-    // public function alldemands() {
-    //     $form_type = 0;
-    //     //$data['students'] = $this->update_model->show_students();
-    //     $data['demands'] = $this->EmployeeModel->alldemands_query($form_type);
-    //     $employee_id = $data['demands'][0]->employee_id;
-    //     $data['employee_name'] = $this->EmployeeModel->employeename($employee_id);
-    //     $this->load->view('Requests/demand', $data);
-    // }
-    // public function alloffers() {
-    //     $form_type = 1;
-    //     //$data['students'] = $this->update_model->show_students();
-    //     $data['offers'] = $this->EmployeeModel->alloffers_query($form_type);
-    //     //echo $data['offers'];
-    //     $employee_id = $data['offers'][0]->employee_id;
-    //     $data['employee_name'] = $this->EmployeeModel->employeename($employee_id);
-    //     $this->load->view('Requests/offer', $data);
-    // }
-
     public function showemployee() {
         $data['allemployee'] = $this->EmployeeModel->allemployee_query();
         $data['types'] = $this->EmployeeModel->type_query();
         $data['position'] = $this->EmployeeModel->position_query();
-
-        // $id=$data['alllemployee']=$this->EmployeeModel->position_query();
         $this->load->view('Employees/ShowEmployee', $data);
     }
 
     public function offersform() {
         $form_type = 0;
-        //$data['students'] = $this->update_model->show_students();
         $data['offers'] = $this->EmployeeModel->alloffers_query($form_type);
-        //echo $data['offers'];
         $employee_id = $data['offers'][0]->employee_id;
-        //  $data['employee_name'] = $this->EmployeeModel->employeename($employee_id);
-
         $data['request_type'] = $this->EmployeeModel->request_type();
         $data['finishing'] = $this->EmployeeModel->finishing();
         $data['way_of_pay'] = $this->EmployeeModel->way_of_pay();
         $this->load->view('Requests/offer', $data);
-        //  $this->load->view('Requests/offer');
     }
 
 
@@ -176,15 +150,12 @@ class employee extends CI_Controller {
     public function demandsform() {
 
         $form_type = 1;
-        //$data['students'] = $this->update_model->show_students();
         $data['demands'] = $this->EmployeeModel->alldemands_query($form_type);
         $employee_id = $data['demands'][0]->employee_id;
         $data['request_type'] = $this->EmployeeModel->request_type();
         $data['finishing'] = $this->EmployeeModel->finishing();
         $data['way_of_pay'] = $this->EmployeeModel->way_of_pay();
-        //$data['employee_name'] = $this->EmployeeModel->employeename($employee_id);
         $this->load->view('Requests/demand', $data);
-        // $this->load->view('Requests/demand');
     }
 
     public function addoffer() {
@@ -209,13 +180,11 @@ class employee extends CI_Controller {
         $check_date2 = $this->input->post('date2');
         $check_date3 = $this->input->post('date3');
         $extra = $this->input->post('notes');
-
         $customer_name = $this->input->post('name');
         $job = $this->input->post('job');
         $customer_phone2 = $this->input->post('tele2');
         $customer_phone1 = $this->input->post('tele1');
         $source = $this->input->post('source');
-
         $form_type=0;//offers && demands=1
 
          if ($this->session->userdata('logged_in')) {
@@ -233,16 +202,10 @@ class employee extends CI_Controller {
          else{
                         $this->load->view('Employees/login_view');
          }
- 
-
-    
     }
-
-
-
     public function adddemand() {
-        $date = $this->input->post('date');
 
+        $date = $this->input->post('date');
         $request_type = $this->input->post('requesttype');
         $way_of_pay = $this->input->post('pay');
         $purpose = $this->input->post('purpose');
@@ -263,7 +226,6 @@ class employee extends CI_Controller {
         $check_date2 = $this->input->post('date2');
         $check_date3 = $this->input->post('date3');
         $extra = $this->input->post('notes');
-
         $customer_name = $this->input->post('name');
         $job = $this->input->post('job');
         $customer_phone2 = $this->input->post('tele2');
@@ -288,7 +250,7 @@ class employee extends CI_Controller {
                         $this->load->view('Employees/login_view');
          }
        
-}
+       }
        
 
     public function deleteemployee() {
@@ -486,10 +448,6 @@ class employee extends CI_Controller {
          else{
             $this->load->view('Employees/login_view');
          }
-       
-
-
-
 
     }
 
@@ -543,16 +501,51 @@ public function updatedemand(){
          else{
             $this->load->view('Employees/login_view');
          }
-       
-
-
-
-
     }
 
   public function deal(){
-        $this->load->view('Deal/deal');
+            $data['deal'] = $this->EmployeeModel->deal();
+
+        $this->load->view('Deal/deal',$data);
 
     }
+
+    public function adddeal(){
+       
+        $namebuyer = $this->input->post('namebuyer');
+        $nameseller = $this->input->post('nameseller');
+        $ratebuyer = $this->input->post('ratebuyer');
+        $rateseller = $this->input->post('rateseller');
+        $dealdate = $this->input->post('dealdate');
+        $dealmoney = $this->input->post('dealmoney');
+        $dealcompanyrate = $this->input->post('dealcompanyrate');
+        $dealemployeerate = $this->input->post('dealemployeerate');
+        $contract = $this->upload_contract();
+       // die($contract);
+
+
+       if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            
+        $emp_id =$session_data['id'];
+       
+        $this->EmployeeModel->Adddeal_query($namebuyer, $nameseller, $ratebuyer, $rateseller,
+         $dealdate, $dealmoney,
+          $dealcompanyrate, $dealemployeerate, $contract, $emp_id);
+
+
+        header('location:' . $this->config->base_url() . 'employee/deal');
+    }
+      else
+         {
+                        $this->load->view('Employees/login_view');
+         }
+
+    }
+
+    public function loadwork(){
+         $this->load->view('Requests/loadwork');
+    }
+
 
 }
