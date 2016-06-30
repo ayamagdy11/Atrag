@@ -30,6 +30,7 @@ class PermissionModel extends CI_Model {
         return $this->db->count_all_results();
     }
     
+    
     //count number of requests that manger replay to it with agrement or refuse
     
     public function countemployeeRequest($id){

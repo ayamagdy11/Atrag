@@ -113,6 +113,7 @@
                                                                      data-img='".$allemployee[$i]->image."'
                                                                      data-contract='".$allemployee[$i]->contract_of_employment."'
 
+
                                                                      >"."<i class='fa fa-pencil-square-o'></i></a></td>";
                                 echo "<td><a type='button' href='#' class='delete-emp' data-toggle='modal' data-target='#DeleteEmployee' data-id='".$allemployee[$i]->id."'><i class='fa fa-trash' aria-hidden='true'></i></a></td>";		
                                 echo "<td><a type='button' class='edit-emp' >"."<i class='fa fa-info' aria-hidden= 'true' ></i></a></td>";
@@ -225,7 +226,7 @@
 							<div class="form-group formLayout">
 								<label for="position" class="control-label ">position: </label>
 							
-									<select class="form-control" name="position" > 
+									<select class="form-control" name="position" id="position"> 
 										  <?php foreach ($position as $value) {
                                            echo '<option value="'.$value->id.'">'.$value->name.'</option>';									     	$x++;
 									     	}
@@ -270,8 +271,8 @@ $(document).on("click",".delete-emp",function () {
 $(document).on("click",".edit-emp",function () {
 	//alert('ok');
 	var id=$(this).data('id');
-	//var empid=$(this).data('empid');
-
+	var empid=$(this).data('empid');
+    var name=$(this).data('name');
 	var birthday=$(this).data('birthday');
 	var email=$(this).data('email');
 
@@ -287,18 +288,18 @@ $(document).on("click",".edit-emp",function () {
 	var coming_to=$(this).data('coming_from');
 	var salary=$(this).data('salary');
 
-    var dept = $(this).data('position');
+    var dept = $(this).data('type');
 
 	var gender=$(this).data('gender');
 	var position=$(this).data('position');
 	var type=$(this).data('type');
 	var img=$(this).data('img');
     var file=$(this).data('contract');
-   // alert(file);
-	//alert(img);
+    //alert(position);
+	//alert(empid);
    $("#file").val(file);
-
-	$("#emp_name").val(id);
+   $("#id").val(empid);
+	$("#emp_name").val(name);
 	$("#emp_birthdate").val(birthday);
 
 	$("#emp_address").val(address);
@@ -312,6 +313,8 @@ $(document).on("click",".edit-emp",function () {
 	$("#emp_fromdate").val(coming_from);
 	$("#emp_todate").val(coming_to);
     $("#emp_salary").val(salary);
+    $("#department").val(dept);
+    $("#position").val(position);
 
  $("#emp_dept").val(dept);
 $("#img").attr("src","../_/images/"+img);

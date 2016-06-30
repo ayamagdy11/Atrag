@@ -11,7 +11,8 @@ class EmployeeModel extends CI_Model {
     }
 
     //insert into employee table
-    public function AddEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id) {
+    public function AddEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from,
+     $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id,$position) {
 
         $data = array(
             'name' => $name,
@@ -30,7 +31,7 @@ class EmployeeModel extends CI_Model {
             'date_of_birth' => $birthDate,
             'employee_id' => $id,
             'gender_id' => $gender,
-            'position_id' => 1
+            'position_id' => $position
         );
 
         $this->db->insert('employee', $data);
@@ -73,6 +74,58 @@ class EmployeeModel extends CI_Model {
         $this->db->insert('customer', $data);
     }
 
+
+
+    public function updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
+         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, 
+         $notes,$finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $customer_job,
+          $customer_phone2, $customer_phone1, $source, $form_type ,$employee_id,$custid
+         )
+       {
+      
+        $data = array(
+            'date' => $date,
+            'request_type' => $request_type,
+            'way_of_pay_id' => $way_of_pay,
+            'purpose' => $purpose,
+            'period' => $period,
+            'commission' => $commission,
+            'area1' => $area1,
+            'area2' => $area2,
+            'area3' => $area3,
+            'area4' => $area4,
+            'size' => $size,
+            'floors' => $floors,
+            'rooms' => $rooms,
+            'reception' => $reception,
+            'bathroom' => $bathroom,
+            'notes' => $notes,
+            'finishing_id' => $finishing_id,
+
+            'check_date1' => $check_date1,
+            'check_date2' => $check_date2,
+            'check_date3' => $check_date3,
+            'extra' => $extra,
+            'customer_name' => $customer_name,
+            'customer_job' => $customer_job,
+            'customer_phone2' => $customer_phone2,
+            'customer_phone1' => $customer_phone1,
+            'source' => $source,
+            'form_type' => $form_type,
+            'employee_id'=>$employee_id,
+
+
+            
+
+
+        );
+         $this->db->where('id', $custid);
+        $this->db->update('customer', $data);
+      //  $this->db->insert('customer', $data);
+
+
+
+    }
     //get employee data from db
     public function employeedata($id) {
         $this->db->select('*');
@@ -86,7 +139,8 @@ class EmployeeModel extends CI_Model {
         return $result;
     }
 
-    public function updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id) {
+    public function updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, 
+        $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id,$empid,$position) {
 
         $data = array(
             'name' => $name,
@@ -103,10 +157,14 @@ class EmployeeModel extends CI_Model {
             'password' => $password,
             'address' => $address,
             'date_of_birth' => $birthDate,
-            'employee_id' => $id,
+            // 'employee_id' => $id,
             'gender_id' => $gender,
+
+             'position_id'=>$position
+
+            
         );
-        $this->db->where('id', '1');
+        $this->db->where('id', $empid);
         $this->db->update('employee', $data);
     }
 
@@ -132,6 +190,14 @@ class EmployeeModel extends CI_Model {
         //  print_r($result) ;
         //echo "<br>";
         //echo($result[0]->name) ;
+
+     $query = $this->db->query("SELECT c.id AS custid,c . *,e . *
+        FROM customer AS c
+        INNER JOIN employee AS e ON ( e.id = c.employee_id )
+        WHERE (
+        c.form_type =$form_type
+        )");
+        $result = $query->result();
         return $result;
     }
 
@@ -222,32 +288,66 @@ class EmployeeModel extends CI_Model {
         return $result;
     }
 
-    public function editRequest($employeeId) {
+    public function editRequest($employeeId,$msgId) {
 
         $data = array(
             'manager_reply' => '1',
         );
         $this->db->where('employee_id', $employeeId);
+        $this->db->where('id', $msgId);
         $this->db->update('permission', $data);
     }
-    public function RefuseRequest($employeeId) {
+    public function RefuseRequest($employeeId,$msgId) {
 
         $data = array(
             'manager_reply' => '1',
             'agreement'=>'0',
         );
         $this->db->where('employee_id', $employeeId);
+        $this->db->where('id', $msgId);
         $this->db->update('permission', $data);
     }
 
-    public function addAgreement($id) {
+    public function addAgreement($id,$msgId) {
         $data = array(
             'agreement' => '1',
         );
         $this->db->where('employee_id', $id);
+        $this->db->where('id', $msgId);
         $this->db->update('permission', $data);
     }
 
+
+    public function Adddeal_query($namebuyer, $nameseller, $ratebuyer, $rateseller,
+         $dealdate, $dealmoney,$dealcompanyrate, $dealemployeerate, $contract, $emp_id){
+           $data = array(
+            'buyer' => $namebuyer,
+            'seller' => $nameseller,
+            'buyer_rate' => $ratebuyer,
+            'saller_rate' => $rateseller,
+            'date' => $dealdate,
+            'total_deal_money' => $dealmoney,
+            'company_commission' => $dealcompanyrate,
+            'employee_commission' => $dealemployeerate,
+            'contract_of_deal' => $contract,
+            'employee_id' => $emp_id,
+        );
+
+        $this->db->insert('deal', $data);
+
+
+    }
+
+
+    public function deal()
+    {
+
+        $this->db->select('*');
+        $this->db->from('deal');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
 }
 
 ?>

@@ -55,12 +55,12 @@
                 <table class="pure-table table-responsive tabdetails" >
                     <thead>
 
-
                     <th>الموضوع</th>
                     </thead>
                     <?php ?>
                     <?php foreach ($replays as $key => $value) { ?>
                         <tbody>
+                            
                             <tr class="cond">
                               
 
