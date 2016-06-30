@@ -11,10 +11,9 @@
 		<div class="menubar">
 			<div class="row">
 				<?php $this->load->view('toolbar'); ?>
-							<div class="topbar">
-			
-<h3>توزيع الطلبات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
-</div>
+				<div class="topbar">
+    <h3>توزيع الطلبات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
+    </div>
 				<div class="col-md-2 col-md-offset-10 ">
 				<?php $this->load->view('MenuBar')?>
 				</div>
@@ -32,25 +31,25 @@
 				
 						<table class="pure-table table-responsive tabdetails" >
 							<thead>
-		
-
-							    <th>id</th>
+							    <th>التسلسل</th>
 								<th>نوع الطلب</th>
 								<th>التاريخ</th>
 								<th>صاحب الطلب</th>
-								<th>إسم المشتري</th>
+								<th>نوع الشقه</th>
 								<th>إسم الموظف</th>
 								<th>تأكيد</th>
 						
 							</thead>
-							<?php foreach ($allrequest as $value) {
+							<?php 
+							$i=1;
+							foreach ($allrequest as $value) {
 
 							?>
 							<tbody>
 								<tr>
-								 <td><?php echo $value->id?></td>
+								 <td><?php echo $i ;?></td>
 
-								<form>
+							
 									<?php if($value->form_type==0) {
 									echo"	<td>عرض</td>";
 									}
@@ -63,48 +62,37 @@
 									<td><?php echo $value->date?></td>
 									<td><?php echo $value->customer_name?></td>
 									<td><?php echo $value->type?></td>
-
 									<td>
-						                    <select class="form-control selectemployee" id="Select_employee" name="Select_employee" class="chooseemployee">
-												 
-												 <?php foreach ($allemployee as $KEY) {
-                                           echo '<option value="'.$KEY->id.'">'.$KEY->name.'</option>';									     	
+				 <select class="form-control selectemployee" id="<?php echo $value->id?>" name="Select_employee" class="chooseemployee">
+					<?php foreach ($allemployee as $key) {
+                                    echo '<option value="'.$key->id.'">'.$key->name.'</option>';
+                                     						     	
 									     	}
 										    ?>
-											</select>
+				</select>
 											</td>
-									<td><button  type="submit" id="request" class="submit editaya" data-id="<?php echo $value->id ;?>">
-										<i class="fa fa-check" aria-hidden="true"></i></button></td>
 
-								</form>
+<td><a  type='button' class=" btn btn-primary submit editaya"  href="javascript:deleteBranch(<?= $value->id; ?>)">click <i class="fa fa-check" aria-hidden="true"></i></a></td>
+
 								</tr>
 							</tbody>
-				<?php 		}?>
+				<?php 	$i++;	}?>
 						</table>
 	
-					 
 					</div>
 			
 			</div>
 		</div>
-
-
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
 <?php $this->load->view('Scripts');?>
 <script>
-$(document).on("click",".editaya",function(){
-	var request=$('#request').data('id');
-	var x=$('#Select_employee').val();
-alert(request);
-//alert(x);
-	var id = $(this).data('id');
+function deleteBranch(id) {
+var x=$('#'+id).val();
+    $.post('<?php echo $this->config->base_url(); ?>employee/insertloadwork', {"reqid" : id ,"empid" : x}, function(data){
+       });
+    }
 
-	// $.post(<?php  ?>ctrl/fubnc,data,function(result){
-
-	// })
-
-});
 </script>
 	</body>
 </html>

@@ -356,6 +356,16 @@ class EmployeeModel extends CI_Model {
         $result = $query->result();
         return $result;
     }
+
+    public function insertloadwork_query($reqid,$empid)
+    {
+             $data = array(
+            'cust_id' => $reqid,
+            'emp_id' => $empid,
+        );
+
+        $this->db->insert('emp_request', $data);
+    }
 }
 
 ?>

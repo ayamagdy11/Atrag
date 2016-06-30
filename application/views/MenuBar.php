@@ -38,7 +38,7 @@
         <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
           <ul>
             <li>
-				<a href="#"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف</a>
+				<a href="<?php echo $this->config->base_url(); ?>employee/cash"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف</a>
 			</li>
             <li>
 				<a href="#"><i class="fa fa-share" aria-hidden="true"></i>إذن توريد</a>

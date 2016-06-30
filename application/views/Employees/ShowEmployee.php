@@ -297,8 +297,8 @@ $(document).on("click",".edit-emp",function () {
     var file=$(this).data('contract');
     //alert(position);
 	//alert(empid);
-   $("#file").val(file);
-   $("#id").val(empid);
+    $("#file").val(file);
+    $("#id").val(empid);
 	$("#emp_name").val(name);
 	$("#emp_birthdate").val(birthday);
 

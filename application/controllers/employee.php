@@ -586,12 +586,26 @@ class employee extends CI_Controller {
     }
 
 
-    public function loadwork(){
+      public function loadwork(){
        
         $data['allrequest'] = $this->EmployeeModel->allrequest();
         $data['allemployee'] = $this->EmployeeModel->allemployee_query();
        // print_r($data['allemployee']);
          $this->load->view('Requests/loadwork',$data);
     }
+
+    public function insertloadwork(){
+
+        $reqid = $this->input->post('reqid');
+        $empid = $this->input->post('empid');
+
+        $this->EmployeeModel->insertloadwork_query($reqid,$empid);
+         header('location:' . $this->config->base_url() . 'employee/loadwork');
+    }
+    public function cash(){
+        $data['allemployee'] = $this->EmployeeModel->allemployee_query();
+        $this->load->view('Treasury/Cashing',$data);
+    }
+}
 
    
