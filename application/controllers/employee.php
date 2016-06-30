@@ -16,12 +16,13 @@ class employee extends CI_Controller {
         $this->load->model('EmployeeModel');
         $this->load->model('PermissionModel');
         $this->load->model('TimemangeModel');
+        $this->load->model('DealsModel');
     }
 
     public function index() {
         $data['position'] = $this->EmployeeModel->position_query();
         $data['types'] = $this->EmployeeModel->type_query();
-        $this->load->view('Employees/AddEmployee',$data);
+        $this->load->view('Employees/AddEmployee', $data);
     }
 
 //employee table 
@@ -46,7 +47,7 @@ class employee extends CI_Controller {
     }
 
     public function upload_contract() {
-       $Empphoto = NULL;
+        $Empphoto = NULL;
         $config['upload_path'] = './_/images';
         $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|bmp|odt|docx';
         $this->load->library('upload', $config);
@@ -79,15 +80,13 @@ class employee extends CI_Controller {
         $gender = $this->input->post('gender');
         $password = $this->input->post('password');
         $zkt_id = $this->input->post('zkt_id');
-        $position=$this->input->post('position');
-        $department=$this->input->post('department');
+        $position = $this->input->post('position');
+        $department = $this->input->post('department');
 
 
         $type = $this->input->post('department');
 
-        $this->EmployeeModel->AddEmployee_query($name, $email, $birthDate, $address,
-         $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract,
-          $type, $gender, $password, $zkt_id,$position,$department);
+        $this->EmployeeModel->AddEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id, $position, $department);
 
         header('location:' . $this->config->base_url() . 'employee');
     }
@@ -119,11 +118,9 @@ class employee extends CI_Controller {
         $zkt_id = $this->input->post('zkt_id');
         $empid = $this->input->post('id');
         $type = $this->input->post('department');
-        $position=$this->input->post('position');
+        $position = $this->input->post('position');
 
-        $this->EmployeeModel->updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, 
-            $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, 
-            $password, $zkt_id,$empid,$type,$position);
+        $this->EmployeeModel->updateEmployee_query($name, $email, $birthDate, $address, $phone, $id, $salary, $date_from, $date_to, $date_of_employment, $img, $contract, $type, $gender, $password, $zkt_id, $empid, $type, $position);
 
         header('location:' . $this->config->base_url() . 'employee/showemployee');
     }
@@ -144,8 +141,6 @@ class employee extends CI_Controller {
         $data['way_of_pay'] = $this->EmployeeModel->way_of_pay();
         $this->load->view('Requests/offer', $data);
     }
-
-
 
     public function demandsform() {
 
@@ -185,24 +180,20 @@ class employee extends CI_Controller {
         $customer_phone2 = $this->input->post('tele2');
         $customer_phone1 = $this->input->post('tele1');
         $source = $this->input->post('source');
-        $form_type=0;//offers && demands=1
+        $form_type = 0; //offers && demands=1
 
-         if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            
-        $employee_id =$session_data['id'];
-        $this->EmployeeModel->Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period,
-         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
-         $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
-          $customer_phone2, $customer_phone1, $source, $form_type,$employee_id
-         );
-                header('location:' . $this->config->base_url() . 'employee/offersform');
 
-         }
-         else{
-                        $this->load->view('Employees/login_view');
-         }
+            $employee_id = $session_data['id'];
+            $this->EmployeeModel->Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period, $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes, $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job, $customer_phone2, $customer_phone1, $source, $form_type, $employee_id
+            );
+            header('location:' . $this->config->base_url() . 'employee/offersform');
+        } else {
+            $this->load->view('Employees/login_view');
+        }
     }
+
     public function adddemand() {
 
         $date = $this->input->post('date');
@@ -232,26 +223,19 @@ class employee extends CI_Controller {
         $customer_phone1 = $this->input->post('tele1');
         $source = $this->input->post('source');
 
-        $form_type=1;//offers && demands=1
+        $form_type = 1; //offers && demands=1
 
-         if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            
-        $employee_id =$session_data['id'];
-         $this->EmployeeModel->Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period,
-         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
-         $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
-          $customer_phone2, $customer_phone1, $source, $form_type,$employee_id
-         );
-        header('location:' . $this->config->base_url() . 'employee/demandsform');
 
-         }
-         else{
-                        $this->load->view('Employees/login_view');
-         }
-       
-       }
-       
+            $employee_id = $session_data['id'];
+            $this->EmployeeModel->Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period, $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes, $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job, $customer_phone2, $customer_phone1, $source, $form_type, $employee_id
+            );
+            header('location:' . $this->config->base_url() . 'employee/demandsform');
+        } else {
+            $this->load->view('Employees/login_view');
+        }
+    }
 
     public function deleteemployee() {
         $id = $this->input->post('delete_employeeid');
@@ -266,10 +250,11 @@ class employee extends CI_Controller {
         $del_result = $this->EmployeeModel->Deleteoffer_query($id);
         header('location:' . $this->config->base_url() . 'employee/offersform');
     }
-        public function deletedemand() {
+
+    public function deletedemand() {
 
         $id = $this->input->post('delete_offerid');
-         echo $id;
+        echo $id;
         $del_result = $this->EmployeeModel->Deleteoffer_query($id);
         header('location:' . $this->config->base_url() . 'employee/offersform');
     }
@@ -298,7 +283,7 @@ class employee extends CI_Controller {
 
     //sarah
     public function Inbox() {
-        $this->load->view('Inbox/inbox');
+        header('location:' . $this->config->base_url() . 'employee/sendRequest');
     }
 
     public function Discounts() {
@@ -360,37 +345,66 @@ class employee extends CI_Controller {
     }
 
     public function tookpermission() {
-        $id = $this->input->post('id');
-        //var_dump($id);
-        $from = $this->input->post('from');
-        $to = $this->input->post('to');
-        $dtFrom = date('Y-m-d H:i:s', strtotime($from));
-        //var_dump($dtFrom);
+        //  $id = $this->input->post('id');
 
-        $dtTo = date('Y-m-d H:i:s', strtotime($to));
-        // var_dump($dtTo);
-        // die();
-        if ($from > $to) {
-            // die('mm');
-            echo"can't insert";
-            $this->form_validation->set_message('check_date', 'الوقت من لابد ان يكون اصغر من وقت الي');
-        } else {
-            // die('sarah');
-            $data['date_to'] = $dtTo;
-            $data['date_from'] = $dtFrom;
-            $data['employee_id'] = $id;
-            // var_dump($data);
-            $this->PermissionModel->addPermission($data);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+            // var_dump($id);
+            $from = $this->input->post('from');
+            $to = $this->input->post('to');
+            $dtFrom = date('Y-m-d H:i:s', strtotime($from));
+            //var_dump($dtFrom);
 
-            echo 'تم اضافه الاذن بنجاح انتظر موافقه المدير';
+            $dtTo = date('Y-m-d H:i:s', strtotime($to));
+            // var_dump($dtTo);
+            // die();
+            if ($from > $to) {
+                // die('mm');
+                echo"can't insert";
+                $this->form_validation->set_message('check_date', 'الوقت من لابد ان يكون اصغر من وقت الي');
+            } else {
+                // die('sarah');
+                $data['date_to'] = $dtTo;
+                $data['date_from'] = $dtFrom;
+                $data['employee_id'] = $id;
+                // var_dump($data);
+                $this->PermissionModel->addPermission($data);
 
+                echo 'تم اضافه الاذن بنجاح انتظر موافقه المدير';
 
-            //if new data enter in database get all data if manger response =0 and add notifications +1
-            //when manger open find new message with data from databases 
-            //select permission of this employee id manger response =0
-            $result=$this->PermissionModel->getRespondingRequest($id);
-            var_dump($result);
+                //  header('location:' . $this->config->base_url() . 'employee/sendRequest');
+            }
         }
+    }
+
+    public function sendRequest() {
+
+        //if new data enter in database get all data if manger response =0 and add notifications +1
+        //when manger open find new message with data from databases 
+        //select permission of this employee id manger response =0
+
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+//            if ($type_id == '4') {
+            //count requests from permission with reurn type that is from permission
+            /*
+             * todo:make another count to count the number of message with type deal then add each other
+             */
+            $data['count'] = $this->PermissionModel->countRequest();
+            $data['requests'] = $this->PermissionModel->getRespondingRequest();
+//            } elseif ($type_id == '3') {
+            //make action to count number of message where sales manger replay=0
+//              $data['countSalesManger'] = $this->DealsModel->countsalesMangerRequest();
+//              $data['deals']=$this->DealsModel->getReqSalesManger();
+//            }
+        }
+
+        $this->load->view('Inbox/inbox', $data);
+
+        //  $this->load->view('toolbar.php', $mangerReply);
+//        }
     }
 
     public function editCommission() {
@@ -401,8 +415,57 @@ class employee extends CI_Controller {
         header('location:' . $this->config->base_url() . 'employee/Commission');
     }
 
-    public function updateoffer(){
-        $date=$this->input->post('edate');
+    //to agree request from manger edit data base with 1 at this employee id and add another column with agrement or refuse
+    public function agreeRequest() {
+        $empId = $this->input->post('employeeid');
+        $msgId = $this->input->post('msgid');
+        $this->EmployeeModel->editRequest($empId, $msgId);
+        $this->EmployeeModel->addAgreement($empId, $msgId);
+    }
+
+    public function RefuseRequest() {
+        $id = $this->input->post('employeeid');
+        $msgId = $this->input->post('msgid');
+        var_dump($msgId);
+        $this->EmployeeModel->RefuseRequest($id, $msgId);
+    }
+
+    public function employeeInbox() {
+        header('location:' . $this->config->base_url() . 'employee/recevieRequest');
+    }
+
+//recieve request to employee inbox where id is for employee
+    public function recevieRequest() {
+
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+            $data['count'] = $this->PermissionModel->countemployeeRequest($id);
+            $data['replays'] = $this->PermissionModel->getRecievedRequest($id);
+//            echo"<pre>";var_dump($data);die();
+            if ($session_data['type_id'] == '1') {      
+                
+                $count=$data['count'];
+                $count2=$this->DealsModel->countemployeeDeal($id);
+                $data['count']=$count+$count2;
+            }
+
+            $this->load->view('Inbox/UserInbox', $data);
+        }
+    }
+
+    //when employee read msg it will be appear again in notification bar
+    //update table employee and make readmessage=1
+    public function readMsg() {
+        $employeeId = $this->input->post('employeeid');
+        var_dump($employeeId);
+        $msgId = $this->input->post('msgid');
+        var_dump($msgId);
+        $this->PermissionModel->readMsg($employeeId, $msgId);
+    }
+
+    public function updateoffer() {
+        $date = $this->input->post('edate');
         $request_type = $this->input->post('erequesttype');
         $way_of_pay = $this->input->post('epay');
         $purpose = $this->input->post('epurpose');
@@ -429,33 +492,25 @@ class employee extends CI_Controller {
         $customer_phone2 = $this->input->post('etele2');
         $customer_phone1 = $this->input->post('etele1');
         $source = $this->input->post('esource');
-        $form_type=0;//offers && demands=1
+        $form_type = 0; //offers && demands=1
 
-        $custid=$this->input->post('custid');
+        $custid = $this->input->post('custid');
 
-         if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            
-        $employee_id =$session_data['id'];
-         $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
-         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
-         $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
-          $customer_phone2, $customer_phone1, $source, $form_type,$employee_id,$custid
-         );
 
-        header('location:' . $this->config->base_url() . 'employee/offersform');
-         }
-         else{
+            $employee_id = $session_data['id'];
+            $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period, $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes, $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job, $customer_phone2, $customer_phone1, $source, $form_type, $employee_id, $custid
+            );
+
+            header('location:' . $this->config->base_url() . 'employee/offersform');
+        } else {
             $this->load->view('Employees/login_view');
-         }
-
+        }
     }
 
-
-
-
-public function updatedemand(){
-        $date=$this->input->post('edate');
+    public function updatedemand() {
+        $date = $this->input->post('edate');
         $request_type = $this->input->post('erequesttype');
         $way_of_pay = $this->input->post('epay');
         $purpose = $this->input->post('epurpose');
@@ -482,36 +537,30 @@ public function updatedemand(){
         $customer_phone2 = $this->input->post('etele2');
         $customer_phone1 = $this->input->post('etele1');
         $source = $this->input->post('esource');
-        $form_type=1;//offers && demands=1
+        $form_type = 1; //offers && demands=1
 
-        $custid=$this->input->post('custid');
+        $custid = $this->input->post('custid');
 
-         if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            
-        $employee_id =$session_data['id'];
-         $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period,
-         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes,
-         $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job,
-          $customer_phone2, $customer_phone1, $source, $form_type,$employee_id,$custid
-         );
-        header('location:' . $this->config->base_url() . 'employee/demandsform');
 
-         }
-         else{
+            $employee_id = $session_data['id'];
+            $this->EmployeeModel->updaterequest_query($date, $request_type, $way_of_pay, $purpose, $period, $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes, $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $job, $customer_phone2, $customer_phone1, $source, $form_type, $employee_id, $custid
+            );
+            header('location:' . $this->config->base_url() . 'employee/demandsform');
+        } else {
             $this->load->view('Employees/login_view');
-         }
+        }
     }
 
-  public function deal(){
-            $data['deal'] = $this->EmployeeModel->deal();
+    public function deal() {
+        $data['deal'] = $this->EmployeeModel->deal();
 
-        $this->load->view('Deal/deal',$data);
-
+        $this->load->view('Deal/deal', $data);
     }
 
-    public function adddeal(){
-       
+    public function adddeal() {
+
         $namebuyer = $this->input->post('namebuyer');
         $nameseller = $this->input->post('nameseller');
         $ratebuyer = $this->input->post('ratebuyer');
@@ -521,27 +570,21 @@ public function updatedemand(){
         $dealcompanyrate = $this->input->post('dealcompanyrate');
         $dealemployeerate = $this->input->post('dealemployeerate');
         $contract = $this->upload_contract();
-       // die($contract);
+        // die($contract);
 
 
-       if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            
-        $emp_id =$session_data['id'];
-       
-        $this->EmployeeModel->Adddeal_query($namebuyer, $nameseller, $ratebuyer, $rateseller,
-         $dealdate, $dealmoney,
-          $dealcompanyrate, $dealemployeerate, $contract, $emp_id);
 
+            $emp_id = $session_data['id'];
 
-        header('location:' . $this->config->base_url() . 'employee/deal');
+            $this->EmployeeModel->Adddeal_query($namebuyer, $nameseller, $ratebuyer, $rateseller, $dealdate, $dealmoney, $dealcompanyrate, $dealemployeerate, $contract, $emp_id);
+            header('location:' . $this->config->base_url() . 'employee/deal');
+        } else {
+            $this->load->view('Employees/login_view');
+        }
     }
-      else
-         {
-                        $this->load->view('Employees/login_view');
-         }
 
-    }
 
     public function loadwork(){
        
@@ -552,5 +595,3 @@ public function updatedemand(){
     }
 
    
-
-}

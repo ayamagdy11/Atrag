@@ -433,16 +433,16 @@ table.pure-table.table-responsive.tabdetails {
     font-size: 22px;
 }
 .mail {
-    position: absolute;
+  position: absolute;
     right: 68%;
     background: red;
     border-radius: 50%;
-    padding: 1px;
+    padding: -1px;
     font-size: 17px;
     width: 23px;
     top: 14px;
     height: 21px;
-    padding-right: 4px;
+    padding-right: 7px;
     color: #fff;
 }
 table.pure-table.table-responsive.tabdetails tr th {

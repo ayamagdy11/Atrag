@@ -37,13 +37,9 @@ class EmployeeModel extends CI_Model {
         $this->db->insert('employee', $data);
     }
 
-    public function Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period,
-         $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, 
-         $notes,$finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $customer_job,
-          $customer_phone2, $customer_phone1, $source, $form_type ,$employee_id
-         )
-    {
-      
+    public function Addrequest_query($date, $request_type, $way_of_pay, $purpose, $period, $commission, $area1, $area2, $area3, $area4, $size, $floors, $rooms, $reception, $bathroom, $notes, $finishing_id, $check_date1, $check_date2, $check_date3, $extra, $customer_name, $customer_job, $customer_phone2, $customer_phone1, $source, $form_type, $employee_id
+    ) {
+
         $data = array(
             'date' => $date,
             'request_type' => $request_type,
@@ -62,7 +58,6 @@ class EmployeeModel extends CI_Model {
             'bathroom' => $bathroom,
             'notes' => $notes,
             'finishing_id' => $finishing_id,
-
             'check_date1' => $check_date1,
             'check_date2' => $check_date2,
             'check_date3' => $check_date3,
@@ -73,15 +68,10 @@ class EmployeeModel extends CI_Model {
             'customer_phone1' => $customer_phone1,
             'source' => $source,
             'form_type' => $form_type,
-            'employee_id'=>$employee_id
-
-
+            'employee_id' => $employee_id
         );
 
         $this->db->insert('customer', $data);
-
-
-
     }
 
 
@@ -169,6 +159,7 @@ class EmployeeModel extends CI_Model {
             'date_of_birth' => $birthDate,
             // 'employee_id' => $id,
             'gender_id' => $gender,
+
              'position_id'=>$position
 
             
@@ -177,9 +168,9 @@ class EmployeeModel extends CI_Model {
         $this->db->update('employee', $data);
     }
 
-    //  public function allemployee() {
 
-    //     $this->db->select('*');
+    // public function employeename($id) {
+    //     $this->db->select('name');
     //     $this->db->from('employee');
     //     $query = $this->db->get();
     //     $result = $query->result();
@@ -187,6 +178,16 @@ class EmployeeModel extends CI_Model {
     // }
 
     public function alldemands_query($form_type) {
+        $this->db->select('*');
+        $this->db->from('customer');
+        $this->db->join('employee', 'employee.id = customer.employee_id', 'left outer');
+        $this->db->where('form_type', $form_type);
+        $query = $this->db->get();
+        $result = $query->result();
+        //  print_r($result) ;
+        //echo "<br>";
+        //echo($result[0]->name) ;
+
      $query = $this->db->query("SELECT c.id AS custid,c . *,e . *
         FROM customer AS c
         INNER JOIN employee AS e ON ( e.id = c.employee_id )
@@ -197,12 +198,12 @@ class EmployeeModel extends CI_Model {
         return $result;
     }
 
-   function login($username, $password) {
-        
+    function login($username, $password) {
+
         $this->db->select('id,type_id,name, password');
         $this->db->from('employee');
         $this->db->where('name', $username);
-        $this->db->where('password',$password);
+        $this->db->where('password', $password);
         $this->db->limit(1);
 
         $query = $this->db->get();
@@ -211,8 +212,6 @@ class EmployeeModel extends CI_Model {
         } else {
             return false;
         }
-         
-        
     }
 
     public function alloffers_query($form_type) {
@@ -252,6 +251,7 @@ class EmployeeModel extends CI_Model {
     public function Deleteoffer_query($id) {
         $this->db->query('DELETE FROM `customer` WHERE `id`=' . $id); //handle for FK to keep up the data
     }
+
     public function position_query() {
         $this->db->select('*');
         $this->db->from('position');
@@ -269,9 +269,7 @@ class EmployeeModel extends CI_Model {
         return $result;
     }
 
-
-    public function request_type()
-    {
+    public function request_type() {
 
         $this->db->select('*');
         $this->db->from('request_type');
@@ -280,9 +278,7 @@ class EmployeeModel extends CI_Model {
         return $result;
     }
 
-
-    public function finishing()
-    {
+    public function finishing() {
 
         $this->db->select('*');
         $this->db->from('finishing');
@@ -291,14 +287,42 @@ class EmployeeModel extends CI_Model {
         return $result;
     }
 
-    public function way_of_pay()
-    {
+    public function way_of_pay() {
 
         $this->db->select('*');
         $this->db->from('way_of_pay');
         $query = $this->db->get();
         $result = $query->result();
         return $result;
+    }
+
+    public function editRequest($employeeId,$msgId) {
+
+        $data = array(
+            'manager_reply' => '1',
+        );
+        $this->db->where('employee_id', $employeeId);
+        $this->db->where('id', $msgId);
+        $this->db->update('permission', $data);
+    }
+    public function RefuseRequest($employeeId,$msgId) {
+
+        $data = array(
+            'manager_reply' => '1',
+            'agreement'=>'0',
+        );
+        $this->db->where('employee_id', $employeeId);
+        $this->db->where('id', $msgId);
+        $this->db->update('permission', $data);
+    }
+
+    public function addAgreement($id,$msgId) {
+        $data = array(
+            'agreement' => '1',
+        );
+        $this->db->where('employee_id', $id);
+        $this->db->where('id', $msgId);
+        $this->db->update('permission', $data);
     }
 
 

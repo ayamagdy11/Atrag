@@ -19,7 +19,8 @@
                 <div class="col-md-2 col-md-offset-10 ">
                     <?php $this->load->view('MenuBar'); ?>
                 </div>
-                <?php if ($this->session->userdata('logged_in')) {
+                <?php
+                if ($this->session->userdata('logged_in')) {
                     $session_data = $this->session->userdata('logged_in');
                     ?>
                     <form action="<?php echo $this->config->base_url(); ?>employee/tookpermission" method="post" class="row" enctype="multipart/form-data">
@@ -72,20 +73,20 @@
         </script>
 
         <script type="text/javascript">
-                    $('#timeFrom').datetimepicker({
-            format: 'yyyy-MM-dd hh:mm:ss',
-                    language: 'pt-BR',
-                    minDate: 0
+            $('#timeFrom').datetimepicker({
+                format: 'yyyy-MM-dd hh:mm:ss',
+                language: 'pt-BR',
+                
 
             });
-                    $('#timeto').datetimepicker({
-            format: 'yyyy-MM-dd hh:mm:ss',
-                    language: 'pt-BR',
-                    minDate: 0
+            $('#timeto').datetimepicker({
+                format: 'yyyy-MM-dd hh:mm:ss',
+                language: 'pt-BR',
+                minDate: 0
 
             });
         </script>
-        <?php $this->load->view('Scripts'); ?>
+<?php $this->load->view('Scripts'); ?>
 
     </body>
 </html>
