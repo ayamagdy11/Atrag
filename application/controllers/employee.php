@@ -20,7 +20,12 @@ class employee extends CI_Controller {
     }
 
     public function index() {
-        $data['position'] = $this->EmployeeModel->position_query();
+              $this->recevieRequest(); 
+
+    }
+    
+    public function addEmplyee(){
+         $data['position'] = $this->EmployeeModel->position_query();
         $data['types'] = $this->EmployeeModel->type_query();
         $this->load->view('Employees/AddEmployee', $data);
     }
@@ -443,15 +448,22 @@ class employee extends CI_Controller {
             $data['count'] = $this->PermissionModel->countemployeeRequest($id);
             $data['replays'] = $this->PermissionModel->getRecievedRequest($id);
 //            echo"<pre>";var_dump($data);die();
-            if ($session_data['type_id'] == '1') {      
-                
-                $count=$data['count'];
-                $count2=$this->DealsModel->countemployeeDeal($id);
-                $data['count']=$count+$count2;
-            }
+//            if ($session_data['type_id'] == '1') {      
+//                
+//                $count=$data['count'];
+//                $count2=$this->DealsModel->countemployeeDeal($id);
+//                $data['count']=$count+$count2;
+//            }
+//            var_dump($data);die();
 
             $this->load->view('Inbox/UserInbox', $data);
+            $this->menubar($data);
         }
+    }
+
+    public function menubar($data) {
+
+        $this->load->view('MenuBar', $data);
     }
 
     //when employee read msg it will be appear again in notification bar
@@ -587,6 +599,11 @@ class employee extends CI_Controller {
 
     public function loadwork() {
         $this->load->view('Requests/loadwork');
+    }
+
+    public function editNotification() {
+        $i['i'] = $this->input->post('i');
+        $this->load->view('MenuBar', $i);
     }
 
 }

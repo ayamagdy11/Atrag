@@ -121,5 +121,16 @@ class DealsModel extends CI_Model {
         $result = $query->result();
         return $result;
     }
+    
+      public function readDeal($employeeId,$msgId){
+        $data = array(
+            'readdeal' => '1',
+        );
+        $this->db->where('employee_id', $employeeId);
+        $this->db->where('id', $msgId);
+        $this->db->where('sales_manager_sign = 1');
+        $this->db->where('manager_sign = 1');
+        $this->db->update('deal', $data);
+    }
 
 }
