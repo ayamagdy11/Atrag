@@ -89,7 +89,7 @@
 								// echo "<td>IT</td>";
 								echo "<td>".$allemployee[$i]->phone."</td>";
 								//echo "<td>".$allemployee[$i]->contract_of_employment."</td>";
-									echo "<td><a type='button' class=' edit-emp' data-toggle='tab' data-target='#EditEmployee' onclick=myFunction() data-target='#EditEmployee'
+									echo "<td><a type='button' class=' edit-emp' data-toggle='tab'  onclick=myFunction() data-target='#EditEmployee'
                                                                      data-empid='".$allemployee[$i]->id."'
                                                                      data-name='".$allemployee[$i]->name."'
                                                                      data-birthday='".$allemployee[$i]->date_of_birth."'

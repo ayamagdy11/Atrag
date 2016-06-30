@@ -544,8 +544,13 @@ public function updatedemand(){
     }
 
     public function loadwork(){
-         $this->load->view('Requests/loadwork');
+       
+        $data['allrequest'] = $this->EmployeeModel->allrequest();
+        $data['allemployee'] = $this->EmployeeModel->allemployee_query();
+       // print_r($data['allemployee']);
+         $this->load->view('Requests/loadwork',$data);
     }
 
+   
 
 }

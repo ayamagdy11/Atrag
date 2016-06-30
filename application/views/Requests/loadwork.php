@@ -34,30 +34,52 @@
 							<thead>
 		
 
-							
-								<th>كود الغقد</th>
+							    <th>id</th>
+								<th>نوع الطلب</th>
 								<th>التاريخ</th>
-								<th>إسم البائع</th>
+								<th>صاحب الطلب</th>
 								<th>إسم المشتري</th>
 								<th>إسم الموظف</th>
 								<th>تأكيد</th>
 						
 							</thead>
+							<?php foreach ($allrequest as $value) {
+
+							?>
 							<tbody>
 								<tr>
-								
-									<td>3</td>
-									<td>23-05-2016</td>
-									<td>احمد</td>
-									<td>احمد</td>
+								 <td><?php echo $value->id?></td>
+
+								<form>
+									<?php if($value->form_type==0) {
+									echo"	<td>عرض</td>";
+									}
+									else
+									{
+										echo"	<td>طلب</td>";
+									}
+
+									?>
+									<td><?php echo $value->date?></td>
+									<td><?php echo $value->customer_name?></td>
+									<td><?php echo $value->type?></td>
+
 									<td>
-						                    <select class="form-control selectemployee" name="Select_employee" class="chooseemployee">
-												<option></option>
+						                    <select class="form-control selectemployee" id="Select_employee" name="Select_employee" class="chooseemployee">
+												 
+												 <?php foreach ($allemployee as $KEY) {
+                                           echo '<option value="'.$KEY->id.'">'.$KEY->name.'</option>';									     	
+									     	}
+										    ?>
 											</select>
 											</td>
-									<td><button type="submit"class="submit"><i class="fa fa-check" aria-hidden="true"></i></button></td>
+									<td><button  type="submit" id="request" class="submit editaya" data-id="<?php echo $value->id ;?>">
+										<i class="fa fa-check" aria-hidden="true"></i></button></td>
+
+								</form>
 								</tr>
 							</tbody>
+				<?php 		}?>
 						</table>
 	
 					 
@@ -70,6 +92,19 @@
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
 <?php $this->load->view('Scripts');?>
+<script>
+$(document).on("click",".editaya",function(){
+	var request=$('#request').data('id');
+	var x=$('#Select_employee').val();
+alert(request);
+//alert(x);
+	var id = $(this).data('id');
 
+	// $.post(<?php  ?>ctrl/fubnc,data,function(result){
+
+	// })
+
+});
+</script>
 	</body>
 </html>
