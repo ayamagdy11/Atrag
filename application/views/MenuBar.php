@@ -38,11 +38,11 @@
         <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
           <ul>
             <li>
-				<a href="<?php echo $this->config->base_url(); ?>employee/cash"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف</a>
+				<a href="<?php echo $this->config->base_url(); ?>employee/cash"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف او أذن توريد</a>
 			</li>
-            <li>
+           <!--  <li>
 				<a href="#"><i class="fa fa-share" aria-hidden="true"></i>إذن توريد</a>
-			</li>
+			</li> -->
 	<li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Discounts">
 			<i class="fa fa-percent" aria-hidden="true"></i>
 				خصومات</a>

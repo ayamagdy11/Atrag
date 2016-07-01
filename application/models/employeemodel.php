@@ -366,6 +366,26 @@ class EmployeeModel extends CI_Model {
 
         $this->db->insert('emp_request', $data);
     }
+
+    public function treasury_type(){
+        $this->db->select('*');
+        $this->db->from('treasury_type');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
+    public function addcash_query($type,$date,$note,$money){
+
+      $data = array(
+            'type' => $type,
+            'date' => $date,
+            'note' => $note,
+            'money' => $money,
+        );
+
+        $this->db->insert('treasury', $data);
+    }
 }
 
 ?>
