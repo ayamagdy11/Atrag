@@ -102,13 +102,13 @@
 					</div>
 					<div class="form-group formLayout">
 						<label for="zkt_id" class="control-label " >رقم بصمه الاصبع: </label>
-						<label for="zkt_id" class="control-label " >800 </label>
+						<label for="zkt_id" class="control-label " ><?php echo $value->zkt_id;?> </label>
 						
 					</div>
 
 					<div class="form-group formLayout">
 						<label for="password" class="control-label " >الرقم السري: </label>
-						<label for="password" class="control-label " >2345 </label>
+						<label for="password" class="control-label " ><?php echo $value->password;?> </label>
 					</div>
 					
 				</div>

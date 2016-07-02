@@ -7,6 +7,7 @@ class uploadfile extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('form', 'url'));
         $this->load->helper('directory');
+        $this->load->model('LateModel');
     }
 
     //index function
@@ -18,6 +19,8 @@ class uploadfile extends CI_Controller {
     //file upload function
     function upload() {
         //set preferences
+$this->LateModel->addLate();
+
         $config['upload_path'] = './_/uploads';
         $config['allowed_types'] = 'txt|pdf|xls|xlsx';
         $config['max_size'] = '900';
@@ -38,6 +41,7 @@ class uploadfile extends CI_Controller {
             // case - success
             $upload_data = $this->upload->data();
             $data['success_msg'] = '<div class="alert alert-success text-center">Your file <strong>' . $upload_data['file_name'] . '</strong> was successfully uploaded!</div>';
+            
             $this->load->view('manger/upload_file_view', $data);
             header('location:' . $this->config->base_url() . 'uploadfile/listFiles');
         }

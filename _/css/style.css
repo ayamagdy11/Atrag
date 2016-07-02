@@ -317,6 +317,7 @@ color:#AAABAE;}
     right: 35%;
     top: 23px;
     font-size: 23px;
+    color: #008DE7;
 }
 .contact {
     width: 57%;
@@ -760,7 +761,7 @@ button.printrecieve {
 }
 
 .tdl-holder h2 {
-    background-color: #de3f53;
+    background-color: #FF8C68;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     color: #fff;
@@ -850,7 +851,7 @@ button.printrecieve {
 	position: absolute;
 	top:20px;
 	width: 16px;	
-	z-index: 1;
+	z-index: 0;
 }
 
 .tdl-holder input[type="checkbox"]:checked + i::after{
@@ -881,7 +882,7 @@ button.printrecieve {
 	font-size:14px;
 	margin:0;
 	padding:20px 15px;
-	width: 270px;
+	width: 300px;
 	-webkit-transition: all .2s linear;
 	   -moz-transition: all .2s linear;
 	     -o-transition: all .2s linear;
@@ -984,6 +985,282 @@ a#cashingprint {
     padding: 7px 23px;
     border-radius: 10px;
 }
-li.showtemployee1{
-    display: none;
+.work5 {
+    width: 61%;
+    margin-right: 117px;
+    margin-top: 43px;
+}
+
+
+
+
+/**************************clock********************************/
+.father {
+    width: 100%;
+    height: 100px;
+    transition: all .54s ease-in-out;
+    position: relative;
+    transform-style: preserve-3d;
+    margin-left: 4px;
+    border-radius: 10px;
+}
+/* .father:hover {
+transform: rotatey(180deg);
+position: relative;
+z-index: 1;
+ width: 300px;
+    height: 100px;
+} */
+.father>div {
+    position: absolute;
+    left: -202px;
+    top: -7px;
+    width: 357px;
+    background: #00BCD4;
+    height: 82px;
+    line-height: 300px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.back{
+z-index:1;
+backface-visibility:hidden;
+background: url("../images/pf-10.jpg")no-repeat center;
+
+}
+.front{
+z-index:1;
+background-color:rgb(255, 90, 20);
+transform:rotatey(180deg);
+backface-visibility:hidden;
+background: url("../images/pf-9.jpg")no-repeat center;
+background-color: rgba(0, 0, 0, 0.2);
+position:relative;
+}
+.back h3 {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.back .fa {
+    position: absolute;
+    top: 19px;
+    left: 16px;
+    font-size: 27px;
+}
+.front h3 {
+position: absolute;
+    top: 23px;
+    right: 40px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.front .fa{
+    position: absolute;
+    top: 37px;
+    left: 41px;
+    font-size: 27px;
+}
+.father2 {
+    width: 200px;
+    height: 68px;
+    transition: all .54s ease-in-out;
+    position: relative;
+    transform-style: preserve-3d;
+    bottom: 44px;
+    /* right: 302px; */
+    border-radius: 5px;
+}
+.col-md-4.paneldata {
+    margin-top: 11px;
+}
+/* .father2:hover {
+transform: rotatey(180deg);
+position: relative;
+z-index: 1;
+width: 300px;
+    height: 100px;
+} */
+.father2>div {
+    position: absolute;
+    left: -92px;
+    top: 4px;
+    width: 356px;
+    background: #FF8C68 !important;
+    height: 75px;
+    line-height: 300px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+.back2{
+z-index:1;
+backface-visibility:hidden;
+background: url("../images/pf-10.jpg")no-repeat center;
+
+}
+.front2{
+z-index:1;
+background-color:rgb(255, 90, 20);
+transform:rotatey(180deg);
+backface-visibility:hidden;
+background: url("../images/pf-9.jpg")no-repeat center;
+background-color: rgba(0, 0, 0, 0.2);
+position:relative;
+}
+.front2 .fa{
+    position: absolute;
+    top: 37px;
+    left: 41px;
+    font-size: 27px;
+}
+.back2 h3 {
+    position: absolute;
+    top: 4px;
+    right: 16px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.back2 .fa {
+    position: absolute;
+    top: 14px;
+    left: 19px;
+    font-size: 27px;
+}
+.front2 h3 {
+position: absolute;
+    top: 23px;
+    right: 40px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.father3 {
+    transition: all .54s ease-in-out;
+    position: relative;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+    width: 200px;
+    height: 68px;
+    /* top: -199px; */
+    /* right: 603px; */
+}
+/* .father3:hover {
+transform: rotatey(180deg);
+position: relative;
+z-index: 1;
+width: 300px;
+    height: 100px;
+} */
+.father3 >div {
+    position: absolute;
+    left: -91px;
+    top: -47px;
+    width: 354px;
+    background: #102B44;
+    height: 100%;
+    line-height: 300px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+.back3{
+z-index:1;
+backface-visibility:hidden;
+background: url("../images/pf-10.jpg")no-repeat center;
+
+}
+.front3{
+z-index:1;
+background-color:rgb(255, 90, 20);
+transform:rotatey(180deg);
+backface-visibility:hidden;
+background: url("../images/pf-9.jpg")no-repeat center;
+background-color: rgba(0, 0, 0, 0.2);
+position:relative;
+}
+.back3 h3 {
+    position: absolute;
+    top: 1px;
+    right: 11px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.back3 .fa {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    font-size: 27px;
+}
+
+.front3 h3 {
+position: absolute;
+    top: 23px;
+    right: 40px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.front3 .fa{
+    position: absolute;
+    top: 37px;
+    left: 41px;
+    font-size: 27px;
+}
+ul.rotate li {
+    width: 33%;
+  
+    list-style: none;
+    margin-top: 19px;
+}
+.uploadexcelsheet h3 {
+    font-size: 14px;
+    float: left;
+    padding-left: 12px;
+    font-weight: bold;
+    color: #fff;
+}
+.uploadexcelsheet {
+    background: #FFC107;
+    width: 97%;
+    height: 92px;
+    padding-top: 2px;
+    margin-top: 4px;
+    /* border: 1px solid #333; */
+    box-shadow: 3px 3px 3px 3px #ccc;
+    padding-right: 15px;
+}
+.rotate span {
+    position: absolute;
+    right: 111px;
+}
+div#calendar {
+    border: 1px solid #ccc;
+}
+/*****************footer****************/
+.pageContainer {
+    min-height:1000px;
+	position:relative;
+}
+footer {
+      height: 70px;
+    padding-top: 10px;
+    margin-top: 20px;
+    background: rgba(158, 158, 158, 0.28);
+    border-top: 2px solid #A90000;
+    position: absolute;
+    width: 100%;
+    bottom:-100px;
+	 display: block;
+}
+.changeuser {
+    position: absolute;
+    right: 43%;
+    top: 18px;
+    font-size: 23px;
 }

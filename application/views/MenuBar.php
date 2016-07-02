@@ -15,7 +15,7 @@
             <div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
             <div class="menu">
                 <ul id="menu" >
-                    <li id="menu-home" ><a href="#"><i class="fa fa-home"></i><span>الصفحة الرئيسية</span></a>
+                    <li id="menu-home" ><a href="<?php echo $this->config->base_url(); ?>employee"><i class="fa fa-home"></i><span>الصفحة الرئيسية</span></a>
                     </li>
                     <?php if ($session_data['type_id'] == '4') { ?>
                         <li id="menu-comunicacao" >

@@ -275,7 +275,6 @@ $(document).on("click",".show-emp",function () {
            $.post("<?php echo $this->config->base_url(); ?>employee/show", data, function (result) {
 
         });
-	$(".modal-body #delete_employeeid").val(id);
 });
 
 

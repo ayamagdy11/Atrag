@@ -23,7 +23,14 @@ class employee extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
             $id = $session_data['id'];
             $data['employee'] = $this->EmployeeModel->employeedata($id);
-            $this->load->view('Employees/EmployeeProfile', $data);
+            $data['employeecount'] = $this->EmployeeModel->employeecount();
+            $data['offerscount'] = $this->EmployeeModel->offerscount();
+            $data['demandscount'] = $this->EmployeeModel->demandscount();
+
+            
+             $this->load->view('Employees/Dashboard', $data);
+
+           // $this->load->view('Employees/EmployeeProfile', $data);
         }
     }
 
@@ -695,5 +702,13 @@ class employee extends CI_Controller {
         $this->EmployeeModel->addcash_query($type, $date, $note, $money);
         header('location:' . $this->config->base_url() . 'employee/cash');
     }
+    public function requestview(){
+      $id = 3;
+      $data['requestview'] = $this->EmployeeModel->requestview($id);
+      $this->load->view('Requests/view',$data);
+
+    }
+
+
 
 }

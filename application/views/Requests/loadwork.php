@@ -72,7 +72,7 @@
 				</select>
 											</td>
 
-<td><a  type='button' class=" btn btn-primary submit editaya"  href="javascript:deleteBranch(<?= $value->id; ?>)">click <i class="fa fa-check" aria-hidden="true"></i></a></td>
+<td><a  type='button' class=" btn btn-primary submit editaya"  href="javascript:loadwork(<?= $value->id; ?>)">click <i class="fa fa-check" aria-hidden="true"></i></a></td>
 
 								</tr>
 							</tbody>
@@ -87,7 +87,7 @@
 
 <?php $this->load->view('Scripts');?>
 <script>
-function deleteBranch(id) {
+function loadwork(id) {
 var x=$('#'+id).val();
     $.post('<?php echo $this->config->base_url(); ?>employee/insertloadwork', {"reqid" : id ,"empid" : x}, function(data){
        });
