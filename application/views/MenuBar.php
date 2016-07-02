@@ -8,7 +8,6 @@
                     ?>   
                     <h4><?php echo $session_data['username']; ?> </h4>
 
-
                     <!--span id="logo" class="fa fa-html5 fa-5x"></span--> 
                   <!--<img id="logo" src="" alt="Logo"/>--> 
                 </a> </header>
@@ -46,22 +45,22 @@
                                 </ul>
                             </li>
                             <?php }?>
-                            <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-share" aria-hidden="true"></i>إذن توريد</a>
-                                    </li>
-                                    <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Discounts">
-                                            <i class="fa fa-percent" aria-hidden="true"></i>
-                                            خصومات</a>
-                                    </li>
-                                    <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Commission"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                            علاوات</a></li>
-                                </ul>
-                            </li>
+                         <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
+          <ul>
+            <li>
+				<a href="<?php echo $this->config->base_url(); ?>employee/cash"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف او أذن توريد</a>
+			</li>
+           <!--  <li>
+				<a href="#"><i class="fa fa-share" aria-hidden="true"></i>إذن توريد</a>
+			</li> -->
+	<li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Discounts">
+			<i class="fa fa-percent" aria-hidden="true"></i>
+				خصومات</a>
+			</li>
+            <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Commission"><i class="fa fa-tasks" aria-hidden="true"></i>
+			علاوات</a></li>
+          </ul>
+        </li>
                             <li><a href="#"><i class="fa fa-share-alt"></i><span>طلبات العملاء</span></a>
                                 <ul>
                                     <li><a href="#"><i class="fa fa-reply" aria-hidden="true"></i>عروض </a></li>

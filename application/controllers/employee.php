@@ -674,9 +674,23 @@ class employee extends CI_Controller {
         header('location:' . $this->config->base_url() . 'employee/loadwork');
     }
 
-    public function cash() {
-        $data['allemployee'] = $this->EmployeeModel->allemployee_query();
-        $this->load->view('Treasury/Cashing', $data);
+    public function cash(){
+        $data['treasury'] = $this->EmployeeModel->treasury_type();
+       // print_r($data['treasury']);
+        $this->load->view('Treasury/Cashing',$data);
     }
 
+       public function addcash(){
+        $type = $this->input->post('type');
+        $date = $this->input->post('date');
+        $note = $this->input->post('note');
+        $money = $this->input->post('money');
+
+        $this->EmployeeModel->addcash_query($type,$date,$note,$money);
+        header('location:' . $this->config->base_url() . 'employee/cash');
+    }
+
+    
 }
+
+
