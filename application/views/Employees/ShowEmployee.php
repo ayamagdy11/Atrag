@@ -116,7 +116,7 @@
 
                                                                      >"."<i class='fa fa-pencil-square-o'></i></a></td>";
                                 echo "<td><a type='button' href='#' class='delete-emp' data-toggle='modal' data-target='#DeleteEmployee' data-id='".$allemployee[$i]->id."'><i class='fa fa-trash' aria-hidden='true'></i></a></td>";		
-                                echo "<td><a type='button' class='edit-emp' >"."<i class='fa fa-info' aria-hidden= 'true' ></i></a></td>";
+                                echo "<td><a type='button' class='show-emp' data-id='".$allemployee[$i]->id."'>"."<i class='fa fa-info' aria-hidden= 'true' ></i></a></td>";
 								echo "</tr>";
 							
 							 echo "</tbody>";
@@ -265,6 +265,20 @@ $(document).on("click",".delete-emp",function () {
 	//alert(id);
 	$(".modal-body #delete_employeeid").val(id);
 });
+
+$(document).on("click",".show-emp",function () {
+	//alert('ok');
+	var id=$(this).data('id');
+        var data={
+            id:id,
+        }
+           $.post("<?php echo $this->config->base_url(); ?>employee/show", data, function (result) {
+
+        });
+	$(".modal-body #delete_employeeid").val(id);
+});
+
+
 </script>
 
 <script>

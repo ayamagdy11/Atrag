@@ -10,8 +10,8 @@
 	
 	<!--------------------------------------------------------------contectpage---------------------------------------------------------------->
 		<div class="Add">
-			
-			<?php $this->load->view('toolbar'); ?>
+                    <?php print_r($employee);?>
+			<?php  foreach ($employee as $key=>$value){?>
 				<div class="col-md-2 col-md-offset-10 ">
 						<?php $this->load->view('MenuBar');?>
 				</div>
@@ -23,19 +23,19 @@
 					<h4>البيانات الشخصية</h4>
 					  <div class="form-group formLayout">
 						<label for="emp_name" class="control-label " >الاسم: </label>
-						<label for="emp_name" class="control-label " >ياسمين عبد المنصف </label>
+						<label for="emp_name" class="control-label " ><?php echo $value->name;?> </label>
 						
 					</div> 
 					<div class="form-group formLayout">
 						<label for="emp_birthdate" class="control-label " >تاريخ الميلاد: </label>
-						<label for="emp_birthdate" class="control-label " >20-04-2015 </label>
+						<label for="emp_birthdate" class="control-label " ><?php echo $value->date_of_birth;?> </label>
 						 
 					</div> 
 					
 					
 					<div class="form-group formLayout">
 						<label for="cust_id" class="control-label " >رقم البطاقة: </label>
-						<label for="cust_id" class="control-label " >3343434567890 </label>
+						<label for="cust_id" class="control-label " ><?php echo $value->image;?> </label>
 						
 					</div>
 						<div class="form-group formLayout">
@@ -50,17 +50,17 @@
 					</div>
 					<div class="form-group formLayout">
 						<label for="cust_mobile" class="control-label " >رقم التليفون: </label>
-						<label for="cust_mobile" class="control-label " >27830308</label>
+						<label for="cust_mobile" class="control-label " ><?php echo $value->phone;?></label>
 					</div>	
 					<div class="form-group formLayout">
 						<label for="emp_email" class="control-label " >الايميل: </label>
-						<label for="emp_email" class="control-label " >yass.aast@gmail.com</label>
+						<label for="emp_email" class="control-label " ><?php echo $value->email;?></label>
 					</div> 
 				</div>
 				</div>
 				<div class="uploaddata">
 					<div class="form-group formLayout profile">
-							<img src="../_/images/profile2.jpg" alt="profile" class="profil_imgdetails"><br>
+							<img src="../_/images/<?php echo $value->image;?>" alt="profile" class="profil_imgdetails"><br>
 														
 						</div>
 					
@@ -70,30 +70,13 @@
 				
 				<div class="col-md-4 ">
 				<div class="work2">
-					<div class="form-group formLayout">
-						<label for="subtraction_rate" class="control-label " >النسبه المئويه للخصم للتأخير: </label>
-						<label for="subtraction_rate" class="control-label " >23% </label>
-					</div>
-					<div class="form-group formLayout">
-						<label for="overtime_rate" class="control-label " >النسبه المثويه للوقت الزياده بعد العمل: </label>
-						<label for="overtime_rate" class="control-label " >23%</label>
-					</div>
+				
 					
 					<div class="form-group formLayout">
 						<label for="emp_salary" class="control-label " >المرتب: </label>
-						<label for="emp_salary" class="control-label " >2000 </label>
+						<label for="emp_salary" class="control-label " ><?php echo $value->total_salary ;?> </label>
 					</div>
 					
-					<div class="form-group formLayout">
-								<label for="department" class="control-label ">القسم: </label>
-								<label for="department" class="control-label ">تسويق </label>
-									
-							</div>
-					<div class="form-group formLayout">
-								<label for="position" class="control-label ">المسمي الوظيفي: </label>
-								<label for="position" class="control-label ">senior</label>
-									
-							</div>	
 					
 				
 				</div>
@@ -103,10 +86,10 @@
 				<div class="form-group formLayout">
 						<label for="cust_fromdate" class="control-label " >مواعيد العمل </label><br>
 						<label for="cust_fromdate" class="control-label " >من: </label>
-						<label for="cust_fromdate" class="control-label " >9:00 AM</label>
+						<label for="cust_fromdate" class="control-label " ><?php echo $value->coming_from;?></label>
 						 
 						 <label for="cust_todate" class="control-label " >إلي: </label>
-						 <label for="cust_todate" class="control-label " >11:00 AM</label>
+						 <label for="cust_todate" class="control-label " ><?php echo $value->coming_to;?></label>
 						 
 					</div>
 				</div></div>
@@ -115,7 +98,7 @@
 					<h4>بيانات العمل</h4>
 					<div class="form-group formLayout">
 						<label for="employment_date" class="control-label " >تاريخ التعيين: </label>
-						<label for="employment_date" class="control-label " >23-05-2016 </label>
+						<label for="employment_date" class="control-label " ><?php echo $value->date_of_employment;?></label>
 						 
 					</div>
 					<div class="form-group formLayout">
@@ -134,9 +117,10 @@
 				</div>
 			
 				</form>
+
 		</div>	
 		</div>
-
+                        <?php } ?>
 
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 

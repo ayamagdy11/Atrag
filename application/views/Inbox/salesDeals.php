@@ -2,8 +2,9 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>الرسائل الواردة</title>
+        <title>الرد علي طلبات الصفقات</title>
         <?php $this->load->view('Header'); ?>
+    </head>
     <body>
         <!------------------------Add Discount----------------->
 
@@ -13,7 +14,6 @@
         <!--------------------------------------------------------------menubar----------------------------------------->
         <div class="menubar">
             <div class="row">
-                <div class="toolbar"><i class="fa fa-bell" aria-hidden="true"></i><div class="notifications" id="notfication"><?php echo $count; ?></div>
 
                 </div>
                 <?php //$this->load->view('toolbar'); ?>
@@ -33,7 +33,7 @@
                     <div class="col-md-6">
                     <h3>الرسائل الواردة</h3>
                     </div-->
-                    <h3>الرسائل الواردة</h3>
+                    <h3>الرد علي طلبات الصفقات</h3>
                 </div>
             </div>
             <div class="col-md-2 col-md-offset-10 ">
@@ -57,27 +57,35 @@
                     <th>الموضوع</th>
                     </thead>
                     <?php ?>
-                    <?php foreach ($replays as $key => $value) { ?>
+                    <?php foreach ($deals as $key => $value) { ?>
                         <tbody>
-
+                            
                             <tr class="cond">
-
+                              
 
                                 <td class="TableDataDiv">
                                     <ul class="row">
-                                        <li class="col-md-12"><a type="button" class="SubItemBtnOpen" id="hideNot"  data-employee-id="<?php echo $value->employee_id; ?>" data-msg-id="<?php echo $value->id; ?>"><span class="fa fa-plus-square"></span> إذن شخصي</a></li>
+                                        <li class="col-md-12"><a type="button" class="SubItemBtnOpen" id="deals"  data-employee-id="<?php echo $value->employee_id; ?>" data-deal-id="<?php echo $value->id;?>"><span class="fa fa-plus-square"></span> الرد علي طلب الصفقه من المدير ومن مدير المبيعات</a></li>
 
                                     </ul>
                                     <div class="SubItem collapse">
-                                        <?php if ($value->agreement == 1) { ?>
-                                            <p class="detailpermission">
-                                                لقدقام المدير بموافقه طلبك بقبول طلب الاذن <?php echo $value->date_from; ?> الي الساعه <?php echo $value->date_to; ?>
-                                            </p>
-                                        <?php } else { ?>
-                                            <p class="detailpermission">
-                                                لقدقام المدير برفض  طلبك بقبول طلب الاذن <?php echo $value->date_from; ?> الي الساعه <?php echo $value->date_to; ?>
-                                            </p>
-                                        <?php } ?>
+                                        <?php if($value->salesmanger_agree==1 && $value->manger_agree==1){?>
+                                        <p class="detailpermission">
+                                            لقدقام المدير ومدير المبيعات بموافقه طلبك بقبول طلب علي هذه الصفقه 
+                                        </p>
+                                        <?php }elseif($value->salesmanger_agree==0 && $value->manger_agree==1){?>
+   <p class="detailpermission">
+                                            لقدقام مدير المبيعات برفض طلبك لذلك لن يتم الموافقه 
+                                        </p>
+                                        <?php }elseif($value->salesmanger_agree==1 && $value->manger_agree==0){?>
+   <p class="detailpermission">
+                                            لقدقام المدير برفض طلبك لذلك لن يتم الموافقه 
+                                        </p>
+                                        <?php }elseif($value->salesmanger_agree==0 && $value->manger_agree==0){?>
+   <p class="detailpermission">
+                                            لقدقام مدير المبيعات والمدير برفض طلبك لذلك لن يتم الموافقه 
+                                        </p>
+                                        <?php }?>
                                     </div>
                                 </td> 
 
@@ -104,38 +112,21 @@
 
 </body>
 </html>
+
 <script>
-   
-     $(document).on("click", "#hideNot", function () {
-     
-     var data = {
-     employeeid: $(this).data('employee-id'),
-     msgid: $(this).data('msg-id')
-     
-     }
-     
-     $.post("<?php echo $this->config->base_url(); ?>employee/readMsg", data, function (result) {
-     var notification = document.getElementById('notfication').innerHTML;
-     var i = parseInt(notification);
-     if (!(i == 0)) {
-     i--;
-     document.getElementById('notfication').innerHTML = i;
-     /*
-     $(this).load('<?php $this->load->view("MenuBar"); ?>', function (i) {
-     alert(i);
-     });*/
-     
-     var result = {
-     i: i
-     }
-     
-     $.get("<?php echo $this->config->base_url(); ?>employee/editNotification", result, function (result) {
-     });
-     
-     
+    
+$(document).on("click", "#deals", function () {
+
+
+    var data = {
+        employeeid: $(this).data('employee-id'),
+        dealid: $(this).data('deal-id')
+
     }
+
+    $.post("<?php echo $this->config->base_url(); ?>dealsController/readDeal", data, function (result) {
     });
-    });
-   
-            
-</script>
+    
+
+});
+    </script>

@@ -35,18 +35,7 @@
                 </div>
                 <?php //$this->load->view('toolbar'); ?>
                 <div class="topbar">
-                    <!--div class="row">
-                    <div class="col-md-6">
-<dropdown class="inboxes">
-<input id="toggle2" type="checkbox">
-<label for="toggle2" class="animate">Editor<i class="fa fa-list float-right"></i></label>
-<ul class="animate">
-<li class="animate">Source<i class="fa fa-code float-right"></i></li>
-<li class="animate">Fullpage<i class="fa fa-arrows-alt float-right"></i></li>
-<li class="animate">Debug<i class="fa fa-cog float-right"></i></li>
-</ul>
-</dropdown>
-</div>
+  
                     <div class="col-md-6">
                     <h3>الرسائل الواردة</h3>
                     </div-->
@@ -138,36 +127,32 @@
 
     <?php $this->load->view('Scripts'); ?>
 
-
-</body>
-</html>
-<?php //} ?>
 <script>
+$(document).on("click","#agree",function(){
+//alert('ok');
 
-    $('#agree').click(function () {
-
-        var Msg = $(this).data('msg-id');
-        var data = {
+    var data = {
             employeeid: $(this).data('employee-id'),
             msgid: $(this).data('msg-id')
         }
         $.post("<?php echo $this->config->base_url(); ?>employee/agreeRequest", data, function (result) {
 
-//            alert($document.find('tr.cod').val()==Msg);
-//          ($(this).find('tr.cod').val() == Msg).hide();
-             $('tr.cond').hide();
+
+           // $('tr.cond').hide();
             var notification = document.getElementById('notfication').innerHTML;
             var i = parseInt(notification);
             if (!(i == 0)) {
                 i--;
                 document.getElementById('notfication').innerHTML = i;
-
+                   document.getElementById('not').innerHTML = i;
+                //var x = document.getElementsByClassName('hfhf').innerHTML = i;
             }
-
         });
-    });
+      
+});
 
-    $('#refuse').click(function () {
+
+    $(document).on("click","#refuse",function(){
 
 
         var data = {
@@ -176,7 +161,7 @@
 
         }
         $.post("<?php echo $this->config->base_url(); ?>employee/RefuseRequest", data, function (result) {
-            $('tr.cond').hide();
+        //    $('tr.cond').hide();
             var notification = document.getElementById('notfication').innerHTML;
             var i = parseInt(notification);
             if (!(i == 0)) {
@@ -187,3 +172,5 @@
         });
     });
 </script>
+</body>
+</html>

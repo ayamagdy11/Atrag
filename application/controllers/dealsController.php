@@ -73,8 +73,28 @@ class dealsController extends CI_Controller {
             } elseif ($type_id == '3') {
                 $type = 'salesManger';
             }
-            $this->DealsModel->RefuseDeal($id, $dealId,$type);
+            $this->DealsModel->RefuseDeal($id, $dealId, $type);
         }
     }
-  
+
+    //in case of sales type will get the response from manger and sales manger
+    public function dealResponse() {
+
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+            $id=$session_data['id'];
+            if ($type_id == '1') {
+               $data['deals']=$this->DealsModel->getRecievedDeal($id);
+                $this->load->view('Inbox/salesDeals',$data);
+            }
+        }
+    }
+    
+     public function readDeal() {
+        $employeeId = $this->input->post('employeeid');
+        $dealId = $this->input->post('dealid');
+        $this->DealsModel->readDeal($employeeId, $dealId);
+    }
+
 }

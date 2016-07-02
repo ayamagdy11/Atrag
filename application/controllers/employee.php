@@ -11,7 +11,6 @@ class employee extends CI_Controller {
         $this->load->library(array('session'));
         $this->load->helper(array('form', 'url'));
         $this->load->helper('download');
-
         $this->load->library(array('form_validation', 'email'));
         $this->load->model('EmployeeModel');
         $this->load->model('PermissionModel');
@@ -20,9 +19,26 @@ class employee extends CI_Controller {
     }
 
     public function index() {
-        $data['position'] = $this->EmployeeModel->position_query();
-        $data['types'] = $this->EmployeeModel->type_query();
-        $this->load->view('Employees/AddEmployee', $data);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+            $data['employee'] = $this->EmployeeModel->employeedata($id);
+            $this->load->view('Employees/EmployeeProfile', $data);
+        }
+    }
+
+    public function addEmplyee() {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+            if ($type_id == '4') {
+                $data['position'] = $this->EmployeeModel->position_query();
+                $data['types'] = $this->EmployeeModel->type_query();
+                $this->load->view('Employees/AddEmployee', $data);
+            } else {
+                echo 'لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط من يستطيع ان يضيف موظف';
+            }
+        }
     }
 
 //employee table 
@@ -126,11 +142,31 @@ class employee extends CI_Controller {
     }
 
     public function showemployee() {
-        $data['allemployee'] = $this->EmployeeModel->allemployee_query();
-        $data['types'] = $this->EmployeeModel->type_query();
-        $data['position'] = $this->EmployeeModel->position_query();
-        $this->load->view('Employees/ShowEmployee', $data);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+            if ($type_id == '4') {
+                $data['allemployee'] = $this->EmployeeModel->allemployee_query();
+                $data['types'] = $this->EmployeeModel->type_query();
+                $data['position'] = $this->EmployeeModel->position_query();
+                $this->load->view('Employees/ShowEmployee', $data);
+            } else {
+                echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
+
+    public function show() {
+        $id = $this->input->post('id');
+        $data['employee'] = $this->EmployeeModel->employeedata($id);
+        $this->load->view('Employees/EmployeeProfile',$data);
+       // header('location:'.$this->config->base_url().'Employees/EmployeeProfile');
+
+    }
+
+//    public function Showemp($data) {
+//        $this->load->view('Employees/EmployeeProfile', $data);
+//    }
 
     public function offersform() {
         $form_type = 0;
@@ -238,10 +274,19 @@ class employee extends CI_Controller {
     }
 
     public function deleteemployee() {
-        $id = $this->input->post('delete_employeeid');
-        // echo $id;
-        $del_result = $this->EmployeeModel->Deleteemployee_query($id);
-        header('location:' . $this->config->base_url() . 'employee/ShowEmployee');
+
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+            if ($type_id == '4') {
+                $id = $this->input->post('delete_employeeid');
+                // echo $id;
+                $del_result = $this->EmployeeModel->Deleteemployee_query($id);
+                header('location:' . $this->config->base_url() . 'employee/ShowEmployee');
+            } else {
+                echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
 
     public function deleteoffer() {
@@ -287,25 +332,49 @@ class employee extends CI_Controller {
     }
 
     public function Discounts() {
-        $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
-        $this->load->view('Treasury/Discount', $disdata);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+            if ($type_id == '4') {
+                $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
+                $this->load->view('Treasury/Discount', $disdata);
+            } else {
+                echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
 
     public function commission() {
-        $commission['commission'] = $this->TimemangeModel->selectCommissions();
-        $this->load->view('Treasury/Commission', $commission);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+            if ($type_id == '4') {
+                $commission['commission'] = $this->TimemangeModel->selectCommissions();
+                $this->load->view('Treasury/Commission', $commission);
+            } else {
+                echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
 
     public function adddiscount() {
-        $this->form_validation->set_rules('late_time', 'Late Time', 'trim|numeric|xss_clean');
-        $this->form_validation->set_rules('late_price', 'Late Price', 'trim|numeric');
-        $data['late_time'] = $this->input->post('late_time');
-        $data['late_price'] = $this->input->post('late_price');
-        $this->TimemangeModel->AddTime($data);
-        $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $type_id = $session_data['type_id'];
+            if ($type_id == '4') {
+                $this->form_validation->set_rules('late_time', 'Late Time', 'trim|numeric|xss_clean');
+                $this->form_validation->set_rules('late_price', 'Late Price', 'trim|numeric');
+                $data['late_time'] = $this->input->post('late_time');
+                $data['late_price'] = $this->input->post('late_price');
+                $this->TimemangeModel->AddTime($data);
+                $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
 //       echo"<pre>"; print_r($disdata);
 //                die();
-        $this->load->view('Treasury/Discount', $disdata);
+                $this->load->view('Treasury/Discount', $disdata);
+            } else {
+                echo "لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
 
     public function addCommission() {
@@ -341,7 +410,7 @@ class employee extends CI_Controller {
     }
 
     public function Request() {
-        $this->load->view('manger/permissions');
+        $this->load->view('Permission/permission');
     }
 
     public function tookpermission() {
@@ -353,6 +422,7 @@ class employee extends CI_Controller {
             // var_dump($id);
             $from = $this->input->post('from');
             $to = $this->input->post('to');
+            $reson = $this->input->post('reson');
             $dtFrom = date('Y-m-d H:i:s', strtotime($from));
             //var_dump($dtFrom);
 
@@ -360,14 +430,13 @@ class employee extends CI_Controller {
             // var_dump($dtTo);
             // die();
             if ($from > $to) {
-                // die('mm');
-                echo"can't insert";
-                $this->form_validation->set_message('check_date', 'الوقت من لابد ان يكون اصغر من وقت الي');
+                echo'الوقت من لابد ان يكون اصغر من وقت الي';
             } else {
                 // die('sarah');
                 $data['date_to'] = $dtTo;
                 $data['date_from'] = $dtFrom;
                 $data['employee_id'] = $id;
+                $data['reson'] = $reson;
                 // var_dump($data);
                 $this->PermissionModel->addPermission($data);
 
@@ -443,15 +512,22 @@ class employee extends CI_Controller {
             $data['count'] = $this->PermissionModel->countemployeeRequest($id);
             $data['replays'] = $this->PermissionModel->getRecievedRequest($id);
 //            echo"<pre>";var_dump($data);die();
-            if ($session_data['type_id'] == '1') {      
-                
-                $count=$data['count'];
-                $count2=$this->DealsModel->countemployeeDeal($id);
-                $data['count']=$count+$count2;
-            }
+//            if ($session_data['type_id'] == '1') {      
+//                
+//                $count=$data['count'];
+//                $count2=$this->DealsModel->countemployeeDeal($id);
+//                $data['count']=$count+$count2;
+//            }
+//            var_dump($data);die();
 
             $this->load->view('Inbox/UserInbox', $data);
+            $this->menubar($data);
         }
+    }
+
+    public function menubar($data) {
+
+        $this->load->view('MenuBar', $data);
     }
 
     //when employee read msg it will be appear again in notification bar
@@ -585,40 +661,42 @@ class employee extends CI_Controller {
         }
     }
 
+    public function loadwork() {
 
-      public function loadwork(){
-       
         $data['allrequest'] = $this->EmployeeModel->allrequest();
         $data['allemployee'] = $this->EmployeeModel->allemployee_query();
-       // print_r($data['allemployee']);
-         $this->load->view('Requests/loadwork',$data);
+        // print_r($data['allemployee']);
+        $this->load->view('Requests/loadwork', $data);
     }
 
-    public function insertloadwork(){
+    public function editNotification() {
+        $i['i'] = $this->input->post('i');
+        $this->load->view('MenuBar', $i);
+    }
+
+    public function insertloadwork() {
 
         $reqid = $this->input->post('reqid');
         $empid = $this->input->post('empid');
 
-        $this->EmployeeModel->insertloadwork_query($reqid,$empid);
-         header('location:' . $this->config->base_url() . 'employee/loadwork');
-    }
-    public function cash(){
-        $data['treasury'] = $this->EmployeeModel->treasury_type();
-       // print_r($data['treasury']);
-        $this->load->view('Treasury/Cashing',$data);
+        $this->EmployeeModel->insertloadwork_query($reqid, $empid);
+        header('location:' . $this->config->base_url() . 'employee/loadwork');
     }
 
-       public function addcash(){
+    public function cash() {
+        $data['treasury'] = $this->EmployeeModel->treasury_type();
+        // print_r($data['treasury']);
+        $this->load->view('Treasury/Cashing', $data);
+    }
+
+    public function addcash() {
         $type = $this->input->post('type');
         $date = $this->input->post('date');
         $note = $this->input->post('note');
         $money = $this->input->post('money');
 
-        $this->EmployeeModel->addcash_query($type,$date,$note,$money);
+        $this->EmployeeModel->addcash_query($type, $date, $note, $money);
         header('location:' . $this->config->base_url() . 'employee/cash');
     }
 
-    
 }
-
-   

@@ -83,11 +83,12 @@
                     <th>عموله الشركه</th>
                     <th>اسم الموظف</th>
                     <th>عقد الصفقه</th>
-                    <th>الشاري</th>
-                    <th>البايع</th>
+                    <th>المشتري</th>
+                    <th>البائع</th>
                     <th>عقد الصفقه</th>
                     <th>موافق/غير موافق</th>
                     </thead>
+                
                     <?php foreach ($deals as $key => $value) { ?>
                         <tbody>
                             <tr class="cond"><input type="hidden" value="<?php $value->id; ?>">
@@ -99,11 +100,19 @@
                             </div>
                         </td>
                         <td><?php echo $value->total_deal_money; ?></td>
+                        <td><?php echo $value->employee_commission; ?></td>
                         <td><?php echo $value->company_commission; ?></td>
-                        <td><?php echo $value->company_commission; ?></td>
-                        <td><?php echo $value->employee_id; ?></td>
-                        <img src="<?php echo $this->config->base_url(); ?>_/images/profile2.jpg" class="inboxphoto">
-                        <td><img></img></td>
+                        <td>
+                        <?php
+                            $this->load->model('EmployeeModel');
+                            $emp = $this->EmployeeModel->employeedata($value->employee_id);
+
+                            foreach ($emp as $employ) {
+                                echo($employ->name);
+                            }
+                            ?>
+                        </td>
+                        <td><img src="../_/images/<?php echo $value->contract_of_deal;?>" height="30px"></img></td>
                         <td><?php echo $value->buyer; ?></td>
                         <td><?php echo $value->seller; ?></td>
 
@@ -174,8 +183,7 @@
     });
 
     $('#refuse').click(function () {
-alert($(this).data('employee-id'));
-alert($(this).data('deal-id'));
+
 
         var data = {
             employeeid: $(this).data('employee-id'),
