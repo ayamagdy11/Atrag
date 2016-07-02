@@ -153,14 +153,9 @@
     <!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
     <?php $this->load->view('Scripts'); ?>
-
-
-</body>
-</html>
-<?php //} ?>
 <script>
 
-    $('#agree').click(function () {
+$(document).on("click","#agree",function(){
 
         var Msg = $(this).data('deal-id');
         var data = {
@@ -170,19 +165,21 @@
         $.post("<?php echo $this->config->base_url(); ?>dealsController/agreeDeal", data, function (result) {
 //            alert($document.find('tr.cod').val()==Msg);
 //          ($(this).find('tr.cod').val() == Msg).hide();
-             $('tr.cond').hide();
+         //    $('tr.cond').hide();
             var notification = document.getElementById('notfication').innerHTML;
             var i = parseInt(notification);
             if (!(i == 0)) {
                 i--;
                 document.getElementById('notfication').innerHTML = i;
+                document.getElementById('omla').innerHTML = i;
+                document.getElementById('omla2').innerHTML = i;
 
             }
 
         });
     });
 
-    $('#refuse').click(function () {
+    $(document).on("click","#refuse",function(){
 
 
         var data = {
@@ -191,14 +188,19 @@
 
         }
         $.post("<?php echo $this->config->base_url(); ?>dealsController/RefuseDeal", data, function (result) {
-            $('tr.cond').hide();
+          //  $('tr.cond').hide();
             var notification = document.getElementById('notfication').innerHTML;
             var i = parseInt(notification);
             if (!(i == 0)) {
                 i--;
                 document.getElementById('notfication').innerHTML = i;
+                document.getElementById('omla2').innerHTML = i;
             }
 
         });
     });
 </script>
+
+</body>
+</html>
+<?php //} ?>

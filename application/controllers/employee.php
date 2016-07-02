@@ -494,6 +494,7 @@ class employee extends CI_Controller {
 
     public function RefuseRequest() {
         $id = $this->input->post('employeeid');
+        var_dump($id);
         $msgId = $this->input->post('msgid');
         var_dump($msgId);
         $this->EmployeeModel->RefuseRequest($id, $msgId);
@@ -669,10 +670,6 @@ class employee extends CI_Controller {
         $this->load->view('Requests/loadwork', $data);
     }
 
-    public function editNotification() {
-        $i['i'] = $this->input->post('i');
-        $this->load->view('MenuBar', $i);
-    }
 
     public function insertloadwork() {
 

@@ -59,10 +59,7 @@
                     <?php ?>
                     <?php foreach ($replays as $key => $value) { ?>
                         <tbody>
-
                             <tr class="cond">
-
-
                                 <td class="TableDataDiv">
                                     <ul class="row">
                                         <li class="col-md-12"><a type="button" class="SubItemBtnOpen" id="hideNot"  data-employee-id="<?php echo $value->employee_id; ?>" data-msg-id="<?php echo $value->id; ?>"><span class="fa fa-plus-square"></span> إذن شخصي</a></li>
@@ -83,8 +80,6 @@
 
                             <?php } ?>
 
-
-                            </form>
                         </tr>
                     </tbody>
                 </table>
@@ -101,41 +96,28 @@
 
     <?php $this->load->view('Scripts'); ?>
 
+    <script>
 
+        $(document).on("click", "#hideNot", function () {
+
+            var data = {
+                employeeid: $(this).data('employee-id'),
+                msgid: $(this).data('msg-id')
+
+            }
+
+            $.post("<?php echo $this->config->base_url(); ?>employee/readMsg", data, function (result) {
+                var notification = document.getElementById('notfication').innerHTML;
+                var i = parseInt(notification);
+                if (!(i == 0)) {
+                    i--;
+                    document.getElementById('notfication').innerHTML = i;
+                    document.getElementById('empnot').innerHTML = i;
+                }
+            });
+        });
+
+
+    </script>
 </body>
 </html>
-<script>
-   
-     $(document).on("click", "#hideNot", function () {
-     
-     var data = {
-     employeeid: $(this).data('employee-id'),
-     msgid: $(this).data('msg-id')
-     
-     }
-     
-     $.post("<?php echo $this->config->base_url(); ?>employee/readMsg", data, function (result) {
-     var notification = document.getElementById('notfication').innerHTML;
-     var i = parseInt(notification);
-     if (!(i == 0)) {
-     i--;
-     document.getElementById('notfication').innerHTML = i;
-     /*
-     $(this).load('<?php $this->load->view("MenuBar"); ?>', function (i) {
-     alert(i);
-     });*/
-     
-     var result = {
-     i: i
-     }
-     
-     $.get("<?php echo $this->config->base_url(); ?>employee/editNotification", result, function (result) {
-     });
-     
-     
-    }
-    });
-    });
-   
-            
-</script>

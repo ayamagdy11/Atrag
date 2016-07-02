@@ -306,6 +306,8 @@ class EmployeeModel extends CI_Model {
         $this->db->update('permission', $data);
     }
     public function RefuseRequest($employeeId,$msgId) {
+        var_dump($employeeId);
+        var_dump($msgId);
 
         $data = array(
             'manager_reply' => '1',

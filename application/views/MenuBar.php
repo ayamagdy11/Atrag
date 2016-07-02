@@ -3,7 +3,8 @@
         <header class="logo"> <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> 
             <a href="#">
                 <img src="<?php echo $this->config->base_url(); ?>_/images/profile1.jpg" alt="profile" class="menuprofile">
-                <?php if ($this->session->userdata('logged_in')) {
+                <?php
+                if ($this->session->userdata('logged_in')) {
                     $session_data = $this->session->userdata('logged_in');
                     ?>   
                     <h4><?php echo $session_data['username']; ?> </h4>
@@ -16,62 +17,96 @@
                 <ul id="menu" >
                     <li id="menu-home" ><a href="#"><i class="fa fa-home"></i><span>الصفحة الرئيسية</span></a>
                     </li>
-                            <?php if ($session_data['type_id'] == '4') { ?>
-                    <li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/Inbox"><i class="fa fa-envelope"></i><span class="mail"></span><?php  $pp=$this->PermissionModel->countRequest();?><div id="not"><?php echo $pp;?></div><span id="dealspan" class="mail">الرسائل الواردة</span>
-                            <?php } else { ?><li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/employeeInbox"><i class="fa fa-envelope"></i><span id="dealspan" class="mail"><?php
-                                if (isset($count)) {
-                                    echo $count;
-                                }elseif(isset($i)){
-                                    echo $i;
-                                }
-                                ?></span><span>الرسائل الواردة</span>
+                    <?php if ($session_data['type_id'] == '4') { ?>
+                        <li id="menu-comunicacao" >
+                            <a href="<?php echo $this->config->base_url(); ?>employee/Inbox">
+                                <i class="fa fa-envelope"></i><span class="mail"></span>
+                                <?php $pp = $this->PermissionModel->countRequest(); ?>
+                                <div id="not"class="mails"><?php echo $pp; ?></div>الرسائل الواردة
+                            <?php } else {
+                                ?>
+                                <li id="menu-comunicacao" >
+                                    <a href="<?php echo $this->config->base_url(); ?>employee/employeeInbox">
+                                        <i class="fa fa-envelope"></i><span class="mail"></span>                         
+                                        <?php $employyy = $this->PermissionModel->countemployeeRequest($session_data['id']); ?>
+                                        <div id="empnot" class="mails"><?php echo $employyy; ?></div> الرسائل الواردة
 
                                     <?php } ?>
 
                             </li>
                             <?php if ($session_data['type_id'] == '4') { ?>
-                            <li id="menu-academico" ><a href="#"><i class="fa fa-users" aria-hidden="true"></i><span>الموظفين</span></a>
-                                <ul id="menu-academico-sub" >
-                                     
-                                    <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/addEmplyee">
-                                            <i class="fa fa-user-plus" aria-hidden="true"></i>
-                                            إضافة موظف</a>
-                                    </li>
-                                     
-                                    <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/ShowEmployee"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                            بيانات الموظفين</a>
-                                    </li>
+                                <li id="menu-academico" ><a href="#"><i class="fa fa-users" aria-hidden="true"></i><span>الموظفين</span></a>
+                                    <ul id="menu-academico-sub" >
 
-                                </ul>
-                            </li>
-                            <?php }?>
-                            <?php if($session_data['type_id'] == '4'){?>
-                         <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
-          <ul>
-            <li>
-				<a href="<?php echo $this->config->base_url(); ?>employee/cash"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف او أذن توريد</a>
-			</li>
-           <!--  <li>
-				<a href="#"><i class="fa fa-share" aria-hidden="true"></i>إذن توريد</a>
-			</li> -->
-	<li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Discounts">
-			<i class="fa fa-percent" aria-hidden="true"></i>
-				خصومات</a>
-			</li>
-            <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Commission"><i class="fa fa-tasks" aria-hidden="true"></i>
-			علاوات</a></li>
-          </ul>
-        </li>
-                            <?php }?>
-                            <li><a href="#"><i class="fa fa-share-alt"></i><span>طلبات العملاء</span></a>
+                                        <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/addEmplyee">
+                                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                                إضافة موظف</a>
+                                        </li>
+
+                                        <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/ShowEmployee"><i class="fa fa-tasks" aria-hidden="true"></i>
+                                                بيانات الموظفين</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            <?php } ?>
+                            <?php if ($session_data['type_id'] == '4') { ?>
+                                <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
+                                    <ul>
+                                        <li>
+                                            <a href="<?php echo $this->config->base_url(); ?>employee/cash"><i class="fa fa-reply" aria-hidden="true"></i>إذن صرف او أذن توريد</a>
+                                        </li>
+                                        <!--  <li>
+                                                             <a href="#"><i class="fa fa-share" aria-hidden="true"></i>إذن توريد</a>
+                                                     </li> -->
+                                        <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Discounts">
+                                                <i class="fa fa-percent" aria-hidden="true"></i>
+                                                خصومات</a>
+                                        </li>
+                                        <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/Commission"><i class="fa fa-tasks" aria-hidden="true"></i>
+                                                علاوات</a></li>
+                                    </ul>
+                                </li>
+                            <?php } ?>
+                            <li><a href="#"><i class="fa fa-share-alt"></i><span>طلبات العملاء</span>
+                                    <div id="omla" class="mails"><?php
+                                        if ($session_data['type_id'] == '4') {
+                                            $dd = $this->DealsModel->countsalesManger();
+                                            echo $dd;
+                                        } elseif ($session_data['type_id'] == '3') {
+                                            $ss = $this->DealsModel->countsalesMangerRequest();
+
+                                            echo $ss;
+                                        } elseif ($session_data['type_id'] == '1') {
+                                            $ff = $this->DealsModel->countemployeeDeal($session_data['id']);
+                                            echo $ff;
+                                        }
+                                        ?></div></a>
                                 <ul>
                                     <li><a href="#"><i class="fa fa-reply" aria-hidden="true"></i>عروض </a></li>
                                     <?php if ($session_data['type_id'] == '1') { ?>
 
                                         <li><a href="<?php echo $this->config->base_url(); ?>employee/deal"><i class="fa fa-share" aria-hidden="true"></i>طلبات الصفقات</a></li>
-                                        <li><a href="<?php echo $this->config->base_url(); ?>dealsController/dealResponse"><i class="fa fa-share" aria-hidden="true"></i>الرد علي طلبات الصفقات</a></li>
+                                        <li><a href="<?php echo $this->config->base_url(); ?>dealsController/dealResponse"><i class="fa fa-share" aria-hidden="true"></i>الرد علي طلبات الصفقات
+
+                                                <div id="salesNot" class="mails">
+
+                                                    <?php $sal = $this->DealsModel->countemployeeDeal($session_data['id']); ?><?php echo $sal; ?>
+                                                </div>
+                                            </a></li>
+
                                     <?php } else if ($session_data['type_id'] == '3' || $session_data['type_id'] == '4') { ?>
-                                        <li><a href="<?php echo $this->config->base_url(); ?>dealsController/acceptDeal"><i class="fa fa-share" aria-hidden="true"></i>الموافقه علي طلبات الصفقات</a></li>
+                                        <li><a href="<?php echo $this->config->base_url(); ?>dealsController/acceptDeal"><i class="fa fa-share" aria-hidden="true"></i>الموافقه علي طلبات الصفقات
+                                                <div id="omla2" class="mails"><?php
+                                                    if ($session_data['type_id'] == '4') {
+                                                        $dd = $this->DealsModel->countsalesManger();
+                                                        echo $dd;
+                                                    } elseif ($session_data['type_id'] == '3') {
+                                                        $ss = $this->DealsModel->countsalesMangerRequest();
+
+                                                        echo $ss;
+                                                    };
+                                                    ?></div></a></li>
                                     <?php } ?>
 
                                 </ul>

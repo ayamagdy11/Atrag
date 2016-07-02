@@ -51,6 +51,7 @@ class PermissionModel extends CI_Model {
         return $result;
     }
     public function readMsg($employeeId,$msgId){
+    
         $data = array(
             'readmsg' => '1',
         );

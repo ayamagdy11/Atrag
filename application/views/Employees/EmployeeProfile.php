@@ -10,7 +10,6 @@
 	
 	<!--------------------------------------------------------------contectpage---------------------------------------------------------------->
 		<div class="Add">
-                    <?php print_r($employee);?>
 			<?php  foreach ($employee as $key=>$value){?>
 				<div class="col-md-2 col-md-offset-10 ">
 						<?php $this->load->view('MenuBar');?>

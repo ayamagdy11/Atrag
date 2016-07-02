@@ -125,6 +125,15 @@ $(document).on("click", "#deals", function () {
     }
 
     $.post("<?php echo $this->config->base_url(); ?>dealsController/readDeal", data, function (result) {
+           var notification = document.getElementById('omla').innerHTML;
+                var i = parseInt(notification);
+                    if (!(i == 0)) {
+                        i--;
+                        document.getElementById('omla').innerHTML = i;
+                        document.getElementById('salesNot').innerHTML = i;
+
+                    }
+
     });
     
 

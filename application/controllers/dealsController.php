@@ -86,6 +86,7 @@ class dealsController extends CI_Controller {
             $id=$session_data['id'];
             if ($type_id == '1') {
                $data['deals']=$this->DealsModel->getRecievedDeal($id);
+               $data['Countdeals']=$this->DealsModel->countemployeeDeal($id);
                 $this->load->view('Inbox/salesDeals',$data);
             }
         }
