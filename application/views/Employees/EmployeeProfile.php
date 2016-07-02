@@ -10,6 +10,7 @@
 	
 	<!--------------------------------------------------------------contectpage---------------------------------------------------------------->
 		<div class="Add">
+                    <?php print_r($employee);?>
 			<?php  foreach ($employee as $key=>$value){?>
 				<div class="col-md-2 col-md-offset-10 ">
 						<?php $this->load->view('MenuBar');?>
@@ -69,14 +70,7 @@
 				
 				<div class="col-md-4 ">
 				<div class="work2">
-					<div class="form-group formLayout">
-						<label for="subtraction_rate" class="control-label " >النسبه المئويه للخصم للتأخير: </label>
-						<label for="subtraction_rate" class="control-label " ><?php echo $value->rate_of_substraction ;?></label>
-					</div>
-					<div class="form-group formLayout">
-						<label for="overtime_rate" class="control-label " >النسبه المثويه للوقت الزياده بعد العمل: </label>
-						<label for="overtime_rate" class="control-label " ><?php echo $value->rate_of_overtime ;?></label>
-					</div>
+				
 					
 					<div class="form-group formLayout">
 						<label for="emp_salary" class="control-label " >المرتب: </label>

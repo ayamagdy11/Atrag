@@ -24,7 +24,6 @@ class employee extends CI_Controller {
             $id = $session_data['id'];
             $data['employee'] = $this->EmployeeModel->employeedata($id);
             $this->load->view('Employees/EmployeeProfile', $data);
-            // $this->recevieRequest();
         }
     }
 
@@ -157,6 +156,18 @@ class employee extends CI_Controller {
         }
     }
 
+    public function show() {
+        $id = $this->input->post('id');
+        $data['employee'] = $this->EmployeeModel->employeedata($id);
+        $this->load->view('Employees/EmployeeProfile',$data);
+       // header('location:'.$this->config->base_url().'Employees/EmployeeProfile');
+
+    }
+
+//    public function Showemp($data) {
+//        $this->load->view('Employees/EmployeeProfile', $data);
+//    }
+
     public function offersform() {
         $form_type = 0;
         $data['offers'] = $this->EmployeeModel->alloffers_query($form_type);
@@ -263,18 +274,18 @@ class employee extends CI_Controller {
     }
 
     public function deleteemployee() {
-        
+
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $type_id = $session_data['type_id'];
-            if($type_id=='4'){
-        $id = $this->input->post('delete_employeeid');
-        // echo $id;
-        $del_result = $this->EmployeeModel->Deleteemployee_query($id);
-        header('location:' . $this->config->base_url() . 'employee/ShowEmployee');
-    }else{
-        echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
-    }
+            if ($type_id == '4') {
+                $id = $this->input->post('delete_employeeid');
+                // echo $id;
+                $del_result = $this->EmployeeModel->Deleteemployee_query($id);
+                header('location:' . $this->config->base_url() . 'employee/ShowEmployee');
+            } else {
+                echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
         }
     }
 
@@ -321,51 +332,49 @@ class employee extends CI_Controller {
     }
 
     public function Discounts() {
-          if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $type_id = $session_data['type_id'];
-            if($type_id=='4'){
-        $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
-        $this->load->view('Treasury/Discount', $disdata);
-    }
-    else{
-        echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
-    }
-          }
+            if ($type_id == '4') {
+                $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
+                $this->load->view('Treasury/Discount', $disdata);
+            } else {
+                echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
 
     public function commission() {
-           if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $type_id = $session_data['type_id'];
-            if($type_id=='4'){
-        $commission['commission'] = $this->TimemangeModel->selectCommissions();
-        $this->load->view('Treasury/Commission', $commission);
-    }
-    else{
-        echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
-    }
-           }
+            if ($type_id == '4') {
+                $commission['commission'] = $this->TimemangeModel->selectCommissions();
+                $this->load->view('Treasury/Commission', $commission);
+            } else {
+                echo"لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
 
     public function adddiscount() {
-         if ($this->session->userdata('logged_in')) {
+        if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $type_id = $session_data['type_id'];
-            if($type_id=='4'){
-        $this->form_validation->set_rules('late_time', 'Late Time', 'trim|numeric|xss_clean');
-        $this->form_validation->set_rules('late_price', 'Late Price', 'trim|numeric');
-        $data['late_time'] = $this->input->post('late_time');
-        $data['late_price'] = $this->input->post('late_price');
-        $this->TimemangeModel->AddTime($data);
-        $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
+            if ($type_id == '4') {
+                $this->form_validation->set_rules('late_time', 'Late Time', 'trim|numeric|xss_clean');
+                $this->form_validation->set_rules('late_price', 'Late Price', 'trim|numeric');
+                $data['late_time'] = $this->input->post('late_time');
+                $data['late_price'] = $this->input->post('late_price');
+                $this->TimemangeModel->AddTime($data);
+                $disdata['discounts'] = $this->TimemangeModel->selectDiscount();
 //       echo"<pre>"; print_r($disdata);
 //                die();
-        $this->load->view('Treasury/Discount', $disdata);
-    }else{
-        echo "لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
-    }
-         }
+                $this->load->view('Treasury/Discount', $disdata);
+            } else {
+                echo "لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط";
+            }
+        }
     }
 
     public function addCommission() {
@@ -674,23 +683,20 @@ class employee extends CI_Controller {
         header('location:' . $this->config->base_url() . 'employee/loadwork');
     }
 
-    public function cash(){
+    public function cash() {
         $data['treasury'] = $this->EmployeeModel->treasury_type();
-       // print_r($data['treasury']);
-        $this->load->view('Treasury/Cashing',$data);
+        // print_r($data['treasury']);
+        $this->load->view('Treasury/Cashing', $data);
     }
 
-       public function addcash(){
+    public function addcash() {
         $type = $this->input->post('type');
         $date = $this->input->post('date');
         $note = $this->input->post('note');
         $money = $this->input->post('money');
 
-        $this->EmployeeModel->addcash_query($type,$date,$note,$money);
+        $this->EmployeeModel->addcash_query($type, $date, $note, $money);
         header('location:' . $this->config->base_url() . 'employee/cash');
     }
 
-    
 }
-
-

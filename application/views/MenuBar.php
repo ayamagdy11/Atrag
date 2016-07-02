@@ -17,7 +17,7 @@
                     <li id="menu-home" ><a href="#"><i class="fa fa-home"></i><span>الصفحة الرئيسية</span></a>
                     </li>
                             <?php if ($session_data['type_id'] == '4') { ?>
-                        <li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/Inbox"><i class="fa fa-envelope"></i><span class="mail"></span><span>الرسائل الواردة</span>
+                    <li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/Inbox"><i class="fa fa-envelope"></i><span class="mail"></span><?php  $pp=$this->PermissionModel->countRequest();?><div id="not"><?php echo $pp;?></div><span id="dealspan" class="mail">الرسائل الواردة</span>
                             <?php } else { ?><li id="menu-comunicacao" ><a href="<?php echo $this->config->base_url(); ?>employee/employeeInbox"><i class="fa fa-envelope"></i><span id="dealspan" class="mail"><?php
                                 if (isset($count)) {
                                     echo $count;
@@ -45,6 +45,7 @@
                                 </ul>
                             </li>
                             <?php }?>
+                            <?php if($session_data['type_id'] == '4'){?>
                          <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
           <ul>
             <li>
@@ -61,6 +62,7 @@
 			علاوات</a></li>
           </ul>
         </li>
+                            <?php }?>
                             <li><a href="#"><i class="fa fa-share-alt"></i><span>طلبات العملاء</span></a>
                                 <ul>
                                     <li><a href="#"><i class="fa fa-reply" aria-hidden="true"></i>عروض </a></li>
