@@ -386,6 +386,38 @@ class EmployeeModel extends CI_Model {
 
         $this->db->insert('treasury', $data);
     }
+
+    public function employeecount(){
+        $query = $this->db->query("SELECT count(*) as count FROM `employee`
+        ");
+        $result = $query->result();
+        return $result;
+    }
+
+    public function offerscount(){
+        $query = $this->db->query(" SELECT count(*) as count FROM customer where form_type=0
+        ");
+        $result = $query->result();
+        return $result;
+    }
+
+        public function demandscount(){
+        $query = $this->db->query(" SELECT count(*) as count FROM customer where form_type=1
+        ");
+        $result = $query->result();
+        return $result;
+    }
+
+        public function requestview($id) {
+        $query = $this->db->query("select c.* , f.type as ftype ,r.type as rtype ,w.way as wway
+from customer c, finishing f, request_type r ,way_of_pay w
+where c.finishing_id = f.id and c.request_type = r.id and c.way_of_pay_id=w.id and c.id=$id
+       
+        ");
+        $result = $query->result();
+        return $result;
+    }
+   
 }
 
 ?>
