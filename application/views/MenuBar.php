@@ -30,18 +30,22 @@
                                     <?php } ?>
 
                             </li>
+                            <?php if ($session_data['type_id'] == '4') { ?>
                             <li id="menu-academico" ><a href="#"><i class="fa fa-users" aria-hidden="true"></i><span>الموظفين</span></a>
                                 <ul id="menu-academico-sub" >
+                                     
                                     <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/addEmplyee">
                                             <i class="fa fa-user-plus" aria-hidden="true"></i>
                                             إضافة موظف</a>
                                     </li>
+                                     
                                     <li id="menu-academico-avaliacoes" ><a href="<?php echo $this->config->base_url(); ?>employee/ShowEmployee"><i class="fa fa-tasks" aria-hidden="true"></i>
                                             بيانات الموظفين</a>
                                     </li>
 
                                 </ul>
                             </li>
+                            <?php }?>
                             <li><a href="#"><i class="fa fa-share-alt"></i><span>الخزنة</span></a>
                                 <ul>
                                     <li>

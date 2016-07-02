@@ -168,15 +168,12 @@ class EmployeeModel extends CI_Model {
         $this->db->update('employee', $data);
     }
 
+
     // public function employeename($id) {
     //     $this->db->select('name');
     //     $this->db->from('employee');
-    //     $this->db->where('id', $id);
     //     $query = $this->db->get();
     //     $result = $query->result();
-    //     //print_r($result) ;
-    //     //echo "<br>";
-    //     //echo($result[0]->name) ;
     //     return $result;
     // }
 
@@ -224,6 +221,17 @@ class EmployeeModel extends CI_Model {
         WHERE (
         c.form_type =$form_type
         )");
+        $result = $query->result();
+        return $result;
+    }
+
+    public function allrequest() {
+        $query = $this->db->query("SELECT c.request_type AS
+            TYPE , c. * , t. type
+            FROM customer AS c
+            INNER JOIN request_type AS t ON ( t.id = c.request_type )
+       
+        ");
         $result = $query->result();
         return $result;
     }
@@ -347,6 +355,16 @@ class EmployeeModel extends CI_Model {
         $query = $this->db->get();
         $result = $query->result();
         return $result;
+    }
+
+    public function insertloadwork_query($reqid,$empid)
+    {
+             $data = array(
+            'cust_id' => $reqid,
+            'emp_id' => $empid,
+        );
+
+        $this->db->insert('emp_request', $data);
     }
 }
 

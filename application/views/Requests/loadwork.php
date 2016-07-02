@@ -11,10 +11,9 @@
 		<div class="menubar">
 			<div class="row">
 				<?php $this->load->view('toolbar'); ?>
-							<div class="topbar">
-			
-<h3>توزيع الطلبات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
-</div>
+				<div class="topbar">
+    <h3>توزيع الطلبات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
+    </div>
 				<div class="col-md-2 col-md-offset-10 ">
 				<?php $this->load->view('MenuBar')?>
 				</div>
@@ -32,44 +31,68 @@
 				
 						<table class="pure-table table-responsive tabdetails" >
 							<thead>
-		
-
-							
-								<th>كود الغقد</th>
+							    <th>التسلسل</th>
+								<th>نوع الطلب</th>
 								<th>التاريخ</th>
-								<th>إسم البائع</th>
-								<th>إسم المشتري</th>
+								<th>صاحب الطلب</th>
+								<th>نوع الشقه</th>
 								<th>إسم الموظف</th>
 								<th>تأكيد</th>
 						
 							</thead>
+							<?php 
+							$i=1;
+							foreach ($allrequest as $value) {
+
+							?>
 							<tbody>
 								<tr>
-								
-									<td>3</td>
-									<td>23-05-2016</td>
-									<td>احمد</td>
-									<td>احمد</td>
+								 <td><?php echo $i ;?></td>
+
+							
+									<?php if($value->form_type==0) {
+									echo"	<td>عرض</td>";
+									}
+									else
+									{
+										echo"	<td>طلب</td>";
+									}
+
+									?>
+									<td><?php echo $value->date?></td>
+									<td><?php echo $value->customer_name?></td>
+									<td><?php echo $value->type?></td>
 									<td>
-						                    <select class="form-control selectemployee" name="Select_employee" class="chooseemployee">
-												<option></option>
-											</select>
+				 <select class="form-control selectemployee" id="<?php echo $value->id?>" name="Select_employee" class="chooseemployee">
+					<?php foreach ($allemployee as $key) {
+                                    echo '<option value="'.$key->id.'">'.$key->name.'</option>';
+                                     						     	
+									     	}
+										    ?>
+				</select>
 											</td>
-									<td><button type="submit"class="submit"><i class="fa fa-check" aria-hidden="true"></i></button></td>
+
+<td><a  type='button' class=" btn btn-primary submit editaya"  href="javascript:deleteBranch(<?= $value->id; ?>)">click <i class="fa fa-check" aria-hidden="true"></i></a></td>
+
 								</tr>
 							</tbody>
+				<?php 	$i++;	}?>
 						</table>
 	
-					 
 					</div>
 			
 			</div>
 		</div>
-
-
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
 <?php $this->load->view('Scripts');?>
+<script>
+function deleteBranch(id) {
+var x=$('#'+id).val();
+    $.post('<?php echo $this->config->base_url(); ?>employee/insertloadwork', {"reqid" : id ,"empid" : x}, function(data){
+       });
+    }
 
+</script>
 	</body>
 </html>

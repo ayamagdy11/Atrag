@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </form>
-                <table class="pure-table table-responsive tabdetails" >
+                <table class="pure-table table-responsive tabdetails" id="filter-table" >
                     <thead>
 
 
@@ -79,7 +79,7 @@
                         </label>
                     </div></th>
                     <th>الصورة</th>
-                    <th>الاسم</th>
+                    <th>اسم الموظف</th>
                     <th>  التاريخ والوقت من</th>
                     <th>التاريخ والوقت الي</th>
                     <th>الموضوع</th>
@@ -87,7 +87,7 @@
                     </thead>
                     <?php foreach ($requests as $key => $value) { ?>
                         <tbody>
-                            <tr class="cond"><input type="hidden" value="<?php $value->id; ?>">
+                            <tr id="" class="cond">
                         <td>
                             <div class="checkbox">
                                 <label>
@@ -96,7 +96,14 @@
                             </div>
                         </td>
                         <td><img src="<?php echo $this->config->base_url(); ?>_/images/profile2.jpg" class="inboxphoto"></td>
-                        <td><?php echo $value->employee_id; ?></td>
+                        <td><?php
+                            $this->load->model('EmployeeModel');
+                            $emp = $this->EmployeeModel->employeedata($value->employee_id);
+
+                            foreach ($emp as $employ) {
+                                echo($employ->name);
+                            }
+                            ?></td>
                         <td><?php echo $value->date_from; ?></td>
                         <td><?php echo $value->date_to; ?></td>
 
@@ -116,7 +123,7 @@
                         <td>
 
                             <button  type="submit" id="agree" class="afree" name="agree" data-employee-id="<?php echo $value->employee_id; ?>"  data-msg-id="<?php echo $value->id; ?>"><i class="fa fa-check" aria-hidden="true"></i></button>      
-                            <button  type="submit" class="none" id="refuse" data-employee-id="<?php echo $value->employee_id; ?> data-msg-id="<?php echo $value->id; ?>"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            <button  type="submit" class="none" id="refuse" data-employee-id="<?php echo $value->employee_id; ?>" data-msg-id="<?php echo $value->id; ?>"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </td>
                     <?php } ?>
 
@@ -141,10 +148,12 @@
 
 </body>
 </html>
-<?php //} ?>
+<?php //}  ?>
 <script>
 
     $('#agree').click(function () {
+        alert($(this).data('employee-id'));
+        alert($(this).data('msg-id'));
 
         var Msg = $(this).data('msg-id');
         var data = {
@@ -155,7 +164,17 @@
 
 //            alert($document.find('tr.cod').val()==Msg);
 //          ($(this).find('tr.cod').val() == Msg).hide();
-             $('tr.cond').hide();
+            //$('tr'#' + row_id').hide();
+            // $('tr.cond').hide();
+            //$("body").find('#' + Msg).hide();
+//              var $tr = $('#filter-table tr:has(.typology[value="' + Msg + '"])');
+//              $tr.hide();
+            //    $('input[value="' + Msg + '"]').closest("tr").hide();
+
+
+            //  $("input[name=" + Msg + "]").hide();
+           // $('tr[id=' + Msg + ']').hide();
+
             var notification = document.getElementById('notfication').innerHTML;
             var i = parseInt(notification);
             if (!(i == 0)) {
@@ -168,7 +187,8 @@
     });
 
     $('#refuse').click(function () {
-
+  alert($(this).data('employee-id'));
+        alert($(this).data('msg-id'));
 
         var data = {
             employeeid: $(this).data('employee-id'),
@@ -176,7 +196,7 @@
 
         }
         $.post("<?php echo $this->config->base_url(); ?>employee/RefuseRequest", data, function (result) {
-            $('tr.cond').hide();
+           // $('tr.cond').hide();
             var notification = document.getElementById('notfication').innerHTML;
             var i = parseInt(notification);
             if (!(i == 0)) {
