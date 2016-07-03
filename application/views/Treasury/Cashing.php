@@ -3,7 +3,14 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>سحب او اضافه في الخزنة</title>
-	<?php $this->load->view('Header');?>
+<link href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap.min.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.theme.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.structure.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/font-awesome.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/style.css" rel="stylesheet">	
 		</head>
 	<body>
 	
@@ -11,7 +18,7 @@
 		<div class="menubar">
 			<div class="row">
 				<?php $this->load->view('toolbar'); ?>
-							<div class="topbar">
+							<div class="topbarcash">
 			
 <h3>صرف من خزنة</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
 </div>
@@ -64,11 +71,21 @@
 
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
-<?php $this->load->view('Scripts');?>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.11.1.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.10.2.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery.validate.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-2.1.1.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/sarah.js"></script> 
+<script src="<?php echo $this->config->base_url(); ?>_/js/Atrag.js"></script>
 <script>
-$("#cashingprint").click(function () { 
-window.print();
-});
-</script>
+  $(function() {
+    $( "#date" ).datepicker();
+
+  });
+  </script>
 	</body>
 </html>

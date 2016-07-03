@@ -9,5 +9,5 @@
 		<link href="../_/css/datepicker.css" rel="stylesheet">
 		<link href="../_/css/fullcalendar.css" rel="stylesheet"><!----calender--->
 		<link href="../_/css/fullcalendar.print.css" rel="stylesheet"><!----calender--->
-		<link href="../_/css/material-charts.css" rel="stylesheet">
+		<!--link href="../_/css/material-charts.css" rel="stylesheet"-->
 		<link href="../_/css/style.css" rel="stylesheet">

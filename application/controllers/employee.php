@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 Header('Content-Type: text/html; charset=UTF-8');
-
+session_start();
 class employee extends CI_Controller {
 
     public function __construct() {
@@ -27,10 +27,10 @@ class employee extends CI_Controller {
             $data['offerscount'] = $this->EmployeeModel->offerscount();
             $data['demandscount'] = $this->EmployeeModel->demandscount();
 
-            
-             $this->load->view('Employees/Dashboard', $data);
 
-           // $this->load->view('Employees/EmployeeProfile', $data);
+            $this->load->view('Employees/Dashboard', $data);
+
+            // $this->load->view('Employees/EmployeeProfile', $data);
         }
     }
 
@@ -46,6 +46,13 @@ class employee extends CI_Controller {
                 echo 'لا يوجد لديك صلاحيات لكي تري هذه الصفحه المدير فقط من يستطيع ان يضيف موظف';
             }
         }
+    }
+    function logout() {
+        $this->session->unset_userdata('logged_in');
+        session_destroy();
+        $this->load->view('Employees/login_view');
+
+        // redirect('Employees/login_view', 'refresh');
     }
 
 //employee table 
@@ -164,11 +171,10 @@ class employee extends CI_Controller {
     }
 
     public function show() {
-        $id = $this->input->post('id');
+        $id = $this->input->get('id');
         $data['employee'] = $this->EmployeeModel->employeedata($id);
-        $this->load->view('Employees/EmployeeProfile',$data);
-       // header('location:'.$this->config->base_url().'Employees/EmployeeProfile');
-
+        $this->load->view('Employees/EmployeeProfile', $data);
+        // header('location:'.$this->config->base_url().'Employees/EmployeeProfile');
     }
 
 //    public function Showemp($data) {
@@ -437,7 +443,10 @@ class employee extends CI_Controller {
             // var_dump($dtTo);
             // die();
             if ($from > $to) {
-                echo'الوقت من لابد ان يكون اصغر من وقت الي';
+                $data['msg'] = 'الوقت من لابد ان يكون اصغر من وقت الي';
+                        $this->load->view('Permission/permission',$data);
+
+               // header('location:' . $this->config->base_url() . 'Permission/permission', $data);
             } else {
                 // die('sarah');
                 $data['date_to'] = $dtTo;
@@ -447,9 +456,10 @@ class employee extends CI_Controller {
                 // var_dump($data);
                 $this->PermissionModel->addPermission($data);
 
-                echo 'تم اضافه الاذن بنجاح انتظر موافقه المدير';
+                $data['msg'] = 'تم اضافه الاذن بنجاح انتظر موافقه المدير';
+                        $this->load->view('Permission/permission',$data);
 
-                //  header('location:' . $this->config->base_url() . 'employee/sendRequest');
+               // header('location:' . $this->config->base_url() . 'Permission/permission', $data);
             }
         }
     }
@@ -482,6 +492,7 @@ class employee extends CI_Controller {
         //  $this->load->view('toolbar.php', $mangerReply);
 //        }
     }
+    
 
     public function editCommission() {
         $id = $this->input->post('id');
@@ -528,6 +539,7 @@ class employee extends CI_Controller {
 //            }
 //            var_dump($data);die();
 
+            //$this->load->view('Inbox/UserInbox', $data);
             $this->load->view('Inbox/UserInbox', $data);
             $this->menubar($data);
         }
@@ -677,7 +689,6 @@ class employee extends CI_Controller {
         $this->load->view('Requests/loadwork', $data);
     }
 
-
     public function insertloadwork() {
 
         $reqid = $this->input->post('reqid');
@@ -702,13 +713,11 @@ class employee extends CI_Controller {
         $this->EmployeeModel->addcash_query($type, $date, $note, $money);
         header('location:' . $this->config->base_url() . 'employee/cash');
     }
-    public function requestview(){
-      $id = 3;
-      $data['requestview'] = $this->EmployeeModel->requestview($id);
-      $this->load->view('Requests/view',$data);
 
+    public function requestview() {
+        $id = $this->input->get('id');
+        $data['requestview'] = $this->EmployeeModel->requestview($id);
+        $this->load->view('Requests/view', $data);
     }
-
-
 
 }

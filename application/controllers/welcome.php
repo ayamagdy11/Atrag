@@ -24,13 +24,13 @@ class Welcome extends CI_Controller {
         }
     }
 
-    function logout() {
-        $this->session->unset_userdata('logged_in');
-        session_destroy();
-        $this->load->view('Employees/login_view');
-
-        // redirect('Employees/login_view', 'refresh');
-    }
+//    function logout() {
+//        $this->session->unset_userdata('logged_in');
+//        session_destroy();
+//        $this->load->view('Employees/login_view');
+//
+//        // redirect('Employees/login_view', 'refresh');
+//    }
 
 }
 

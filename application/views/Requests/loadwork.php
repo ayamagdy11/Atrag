@@ -11,7 +11,7 @@
 		<div class="menubar">
 			<div class="row">
 				<?php $this->load->view('toolbar'); ?>
-				<div class="topbar">
+				<div class="topbarload">
     <h3>توزيع الطلبات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
     </div>
 				<div class="col-md-2 col-md-offset-10 ">
@@ -37,6 +37,7 @@
 								<th>صاحب الطلب</th>
 								<th>نوع الشقه</th>
 								<th>إسم الموظف</th>
+                                                                <th>الطلب</th>
 								<th>تأكيد</th>
 						
 							</thead>
@@ -71,7 +72,9 @@
 										    ?>
 				</select>
 											</td>
-
+<?php  
+$x=$value->id;
+ echo "<td><a href='".$this->config->base_url()."employee/requestview?id=$x'>تفاصيل الطلب </a></td>" ?>
 <td><a  type='button' class=" btn btn-primary submit editaya"  href="javascript:loadwork(<?= $value->id; ?>)">click <i class="fa fa-check" aria-hidden="true"></i></a></td>
 
 								</tr>

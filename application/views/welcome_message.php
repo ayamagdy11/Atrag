@@ -6,6 +6,6 @@
  <body>
    <h1>Home</h1>
    <h2>Welcome <?php echo $username; ?>!</h2>
-   <a href="welcome/logout">Logout</a>
+   <a href="<?php $this->config->base_url() ?>employee/logout">Logout</a>
  </body>
 </html>

@@ -7,6 +7,15 @@
 		</head>
 	<body>
 	<!------------------------Add Discount---------------->
+        
+        	<div class="menubar">
+			<div class="row">
+				<?php $this->load->view('toolbar'); ?>
+				<div class="topbarload">
+    <h3>العروض</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
+    <div class="col-md-2 col-md-offset-10 ">
+				<?php $this->load->view('MenuBar')?>
+				</div>
 		<div class="modal fade" id="AddRequest">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -510,7 +519,7 @@
 
 
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
-
+                                </div>
 <?php $this->load->view('Scripts');?>
 <script>
 $(document).on("click",".delete-offer",function () {

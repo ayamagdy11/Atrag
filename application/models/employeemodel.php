@@ -20,6 +20,7 @@ class EmployeeModel extends CI_Model {
             'email' => $email,
             'image' => $img,
             'fixed_salary' => $salary,
+            'total_salary' => $salary,
             'coming_from' => $date_from,
             'coming_to' => $date_to,
             'date_of_employment' => $date_of_employment,
@@ -411,10 +412,13 @@ class EmployeeModel extends CI_Model {
     }
 
         public function requestview($id) {
-        $query = $this->db->query("select c.* , f.type as ftype ,r.type as rtype ,w.way as wway
-from customer c, finishing f, request_type r ,way_of_pay w
-where c.finishing_id = f.id and c.request_type = r.id and c.way_of_pay_id=w.id and c.id=$id
-       
+         //   die($id);
+        $query = $this->db->query("SELECT c . * , f.type AS ftype, r.type AS rtype, w.way AS wway
+        FROM customer c, finishing f, request_type r, way_of_pay w
+        WHERE c.finishing_id = f.id
+        AND c.request_type = r.id
+        AND c.way_of_pay_id = w.id
+        AND c.id =$id
         ");
         $result = $query->result();
         return $result;

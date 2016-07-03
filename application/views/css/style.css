@@ -314,11 +314,10 @@ color:#AAABAE;}
 }
 .toolbar .fa-bell {
     position: absolute;
-    right: 447px;
-    top: 21px;
+    right: 35%;
+    top: 23px;
     font-size: 23px;
     color: #102B44;
-    z-index: 2;
 }
 .contact {
     width: 57%;
@@ -400,34 +399,13 @@ img.profil_img {
 .inputfields {
     margin-top: 14%;
 }
-.topbarload {
-    width: 100%;
-    background: none repeat scroll 0% 0% #FF9800;
-    height: 41px;
-    margin-top: -23px;
-}
 .btn-default {
-    color: #fff;
-    background-color: #102B44;
-    border-color: #fff;
-    width: 133px;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    width: 183px;
     margin-left: 20px;
-    margin-top: 24px;
-    font-family: Conv_stc_1;
-}
-.col-md-9.col-md-offset-1.details {
-    margin-top: -111px;
-}
-.topbaroffer h3 {
-    position: absolute;
-    top: 43px;
-    font-family: Conv_stc_1;
-}
-.topbaroffer{
-    width: 100%;
-    background: none repeat scroll 0% 0% #FF9800;
-    height: 41px;
-    margin-top: -61px;
+    margin-top: 25px;
 }
 table.pure-table.table-responsive.tabdetails {
     width: 93%;
@@ -446,10 +424,9 @@ table.pure-table.table-responsive.tabdetails {
 }
 .logout {
     position: absolute;
-    right: 28%;
+    right: 27%;
     top: 20px;
     font-size: 22px;
-    /* color: #333; */
 }
 .toolbar .fa-envelope {
     position: absolute;
@@ -468,10 +445,6 @@ table.pure-table.table-responsive.tabdetails {
     background: red;
     color: #fff;
     /* padding-right: 21px; */
-    display: inline-block;
-    position: absolute;
-    left: 52px;
-    font-family: -webkit-pictograph;
 }
 table.pure-table.table-responsive.tabdetails tr th {
     border: 1px solid #ccc;
@@ -606,13 +579,7 @@ p.detailpermission {
 }
 .topbar {
     width: 100%;
-    background: none repeat scroll 0% 0% #FF9800;
-    height: 41px;
-    margin-top: 61px;
-}
-.topbarhh {
-    width: 100%;
-    background: none repeat scroll 0% 0% #FF9800;
+    background: #FF9800;
     height: 41px;
     margin-top: -22px;
 }
@@ -621,12 +588,6 @@ p.detailpermission {
     margin-right: 271px;
     color: #fff;
     padding-top: 10px;
-}
-.topbarcash {
-    width: 100%;
-    background: none repeat scroll 0% 0% #FF9800;
-    height: 41px;
-    margin-top: -22px;
 }
 /*****************
 *{
@@ -724,47 +685,11 @@ $colors: #E74C3C, #0072B5, #2C3E50;
     font-family: 'Conv_Diwanltr';
     text-shadow: 0px 2px 3px #F58220;
 }
-.topbardiscount {
-    width: 100%;
-    background: none repeat scroll 0% 0% #FF9800;
-    height: 41px;
-    margin-top: -22px;
-}
-.topbardiscount h3{
-    color: #fff;
-    
-}
-.topbardiscount h3 {
-    color: #fff;
-    float: right;
-    position: absolute;
-    right: 20%;
-    top: 52px;
-}
 .alert {
     background: #4CAF50;
     color: #fff;
     position: absolute;
     width: 167px;
-}
-h2.logoword {
-    position: absolute;
-    left: 61px;
-    top: -3%;
-    font-size: 49px;
-    /* font-family: 'Conv_BFantezy' !important; */
-    color: #102B44;
-    font-family: 'Conv_Diwanltr';
-    text-shadow: 0px 2px 3px #F58220;
-}
-.detailsinbox {
-    margin-top: -118px;
-}
-.topbarinbox {
-    width: 100%;
-    background: none repeat scroll 0% 0% #FF9800;
-    height: 41px;
-    margin-top: -22px;
 }
 button.sendpermission {
     margin-right: 20px;
@@ -1348,5 +1273,5 @@ footer {
 }
 .nav-tabs {
     border-bottom: 1px solid #ddd;
-    margin-top: 75px;
+    margin-top: -43px;
 }

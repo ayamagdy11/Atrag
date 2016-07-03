@@ -20,8 +20,22 @@
         <!--------------------------------------------------------------menubar----------------------------------------->
         <div class="menubar">
             <div class="row">
-                <div class="toolbar"><i class="fa fa-bell" aria-hidden="true"></i><div class="notifications" id="notfication">
-                        <?php
+                <div class="col-md-10 new">
+                    <!--<div class="logout"><a href="<?php $this->config->base_url() ?>logout"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>-->
+                    <h2 class="logoword">أتراج</h2>
+			<form id="SearchForm" class="col-md-5  col-md-offset-3 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="SearhDiv form-group formLayout col-md-9 col-sm-12 col-xs-12 ">
+                                         <span class="Inputspan fa fa-search"></span>
+		        					     <input type="text" name=""  class="form-control" placeholder="" />
+	       				            </div>
+                                </div>
+								</form>	</div>
+<!--                <div class="logout"><a href="<//?php echo $this->config->base_url() ?>employee/logout"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>-->
+
+                <div class="toolbar col-md-2"><i class="fa fa-bell" aria-hidden="true"></i><div class="notifications" id="notfication">
+         
+               <?php
 //                            if ($session_data['type_id'] == '4') {
 //                                echo $countManger;
 //                            } elseif ($session_data['type_id'] == '3') {
@@ -37,8 +51,6 @@
                 <div class="topbar">
 
                     <div class="col-md-6">
-                        <h3>الرسائل الواردة</h3>
-                        </div-->
                         <h3>الرسائل الواردة</h3>
                     </div>
                 </div>
@@ -67,7 +79,7 @@
                                 <input type="checkbox"> 
                             </label>
                         </div></th>
-                        <th>الصورة</th>
+                       
                         <th>الاسم</th>
                         <th>  التاريخ والوقت من</th>
                         <th>التاريخ والوقت الي</th>
@@ -84,7 +96,7 @@
                                     </label>
                                 </div>
                             </td>
-                            <td><img src="<?php echo $this->config->base_url(); ?>_/images/profile2.jpg" class="inboxphoto"></td>
+                           
                             <td><?php echo $value->employee_id; ?></td>
                             <td><?php echo $value->date_from; ?></td>
                             <td><?php echo $value->date_to; ?></td>
@@ -104,7 +116,7 @@
 
                             <td>
 
-                                <button  type="submit" id="agree" class="afree" name="agree" data-employee-id="<?php echo $value->employee_id; ?>"  data-msg-id="<?php echo $value->id; ?>"><i class="fa fa-check" aria-hidden="true"></i></button>      
+                                <button  type="submit" class="submit" id="agree" class="afree" name="agree" data-employee-id="<?php echo $value->employee_id; ?>"  data-msg-id="<?php echo $value->id; ?>"><i class="fa fa-check" aria-hidden="true"></i></button>      
                                 <button  type="submit" class="none" id="refuse" data-employee-id="<?php echo $value->employee_id; ?>" data-msg-id="<?php echo $value->id; ?>"><i class="fa fa-times" aria-hidden="true"></i></button>
                             </td>
                         <?php } ?>

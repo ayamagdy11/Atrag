@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
+        
+        <link href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap.min.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.theme.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.structure.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/font-awesome.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/style.css" rel="stylesheet">	
         <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" media="screen"
               href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
@@ -16,17 +26,17 @@
 
         <!--------------------------------------------------------------menubar----------------------------------------->
         <div class="menubar">
+                <?php $this->load->view('toolbar'); ?>  
             <div class="row">
-                <div class="topbar">
-
-                    <h3>طلب إذن</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
-                </div>
+               			<div class="topbarload">
+    <h3>توزيع الطلبات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
+    </div>
             </div>
             <div class="col-md-2 col-md-offset-10 ">
                 <?php $this->load->view('MenuBar') ?>
             </div>
 
-            <div class=" col-md-9 col-md-offset-1 details">
+            <div class=" col-md-9 col-md-offset-1 ">
 
 
 
@@ -69,7 +79,7 @@
                             <textarea name="reson" class="causepermission"></textarea>
                         </div>
                         <button type="submit" class="btn btn-default" id="addemployee">تأكيد</button>
-
+                            <label><?php if(isset($msg)) echo $msg; ?></label>
                     </form>
                 </div>
 
@@ -83,8 +93,17 @@
 
     <!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
-    <?php $this->load->view('Scripts'); ?>
 
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.11.1.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.10.2.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery.validate.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-2.1.1.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/sarah.js"></script> 
+<script src="<?php echo $this->config->base_url(); ?>_/js/Atrag.js"></script>
     <script type="text/javascript"
             src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
     </script> 

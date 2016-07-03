@@ -20,6 +20,16 @@
         <!--------------------------------------------------------------menubar----------------------------------------->
         <div class="menubar">
             <div class="row">
+                                <div class="col-md-10 new"><div class="logout"><a href="#"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
+                    <h2 class="logoword">أتراج</h2>
+			<form id="SearchForm" class="col-md-5  col-md-offset-3 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="SearhDiv form-group formLayout col-md-9 col-sm-12 col-xs-12 ">
+                                         <span class="Inputspan fa fa-search"></span>
+		        					     <input type="text" name=""  class="form-control" placeholder="" />
+	       				            </div>
+                                </div>
+								</form>	</div>
                 <div class="toolbar"><i class="fa fa-bell" aria-hidden="true"></i><div class="notifications" id="notfication">
                         <?php
 //                            if ($session_data['type_id'] == '4') {
@@ -33,8 +43,13 @@
                         ?></div>
 
                 </div>
-                <?php //$this->load->view('toolbar'); ?>
+     
                 <div class="topbar">
+                                 <div class="topbaroffer">
+			
+<h3>صفقات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
+</div>
+       
                     <!--div class="row">
                     <div class="col-md-6">
 <dropdown class="inboxes">
@@ -57,7 +72,7 @@
                 <?php $this->load->view('MenuBar') ?>
             </div>
 
-            <div class=" col-md-9 col-md-offset-1 details">
+            <div class=" col-md-9 col-md-offset-1 detailsoffer">
 
 
                 <form id="SearchForm" class="col-md-7 col-md-offset-4 col-sm-12 col-xs-12">

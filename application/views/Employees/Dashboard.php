@@ -2,8 +2,18 @@
 <html lang="en">
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>الصفحة الرئيسية</title>
-	<?php $this->load->view('Header');?>
+	  
+                 <link href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap.min.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.theme.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.structure.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/font-awesome.css" rel="stylesheet">
+	<link href="<?php echo $this->config->base_url(); ?>_/css/fullcalendar.css" rel="stylesheet">
+	<link href="<?php echo $this->config->base_url(); ?>_/css/fullcalendar.print.css" rel="stylesheet">
+
+                <link href="<?php echo $this->config->base_url(); ?>_/css/style.css" rel="stylesheet">	
 		</head>
 
 	<body>  
@@ -126,9 +136,9 @@
 						<div class="row">
 							
 							<div class="col-md-12">
-							<div id='calendar'></div>
+							<!--div id='calendar'></div-->
 							</div>
-							<div class="col-md-4">
+							<!--div class="col-md-4">
 							<!-- 	<div class="tdl-holder">
 								<h2>ملاحظات</h2>
 								<div class="tdl-content">
@@ -155,7 +165,16 @@
 
 	<!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
-<?php $this->load->view('Scripts');?>
+
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.11.3.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.10.2.js"></script>
+
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/sarah.js"></script> 
+<script src="<?php echo $this->config->base_url(); ?>_/js/Atrag.js"></script>
 <script>
 var exampleBarChartData = {
     "datasets": {

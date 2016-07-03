@@ -20,9 +20,10 @@
                     <?php if ($session_data['type_id'] == '4') { ?>
                         <li id="menu-comunicacao" >
                             <a href="<?php echo $this->config->base_url(); ?>employee/Inbox">
-                                <i class="fa fa-envelope"></i><span class="mail"></span>
                                 <?php $pp = $this->PermissionModel->countRequest(); ?>
                                 <div id="not"class="mails"><?php echo $pp; ?></div>الرسائل الواردة
+                                                                <i class="fa fa-envelope"></i><span class="mail"></span>
+
                             <?php } else {
                                 ?>
                                 <li id="menu-comunicacao" >
@@ -83,7 +84,17 @@
                                         }
                                         ?></div></a>
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-reply" aria-hidden="true"></i>عروض </a></li>
+                                    <?php if ($session_data['type_id'] == '2') { ?>
+                                    <li><a href="<?php echo $this->config->base_url(); ?>employee/offersform"><i class="fa fa-reply" aria-hidden="true"></i>عروض </a></li>
+                                    <li><a href="<?php echo $this->config->base_url(); ?>employee/demandsform"><i class="fa fa-reply" aria-hidden="true"></i>طلبات </a></li>
+                                        
+                                        <?php }?>
+                                    
+                                    <?php if ($session_data['type_id'] == '1') { ?>
+                                         <li><a href="<?php echo $this->config->base_url(); ?>employee/salesMangerRequest"><i class="fa fa-share" aria-hidden="true"></i>طلبات مدير المبيعات</a></li>
+
+                                    
+                                    <?php}?> 
                                     <?php if ($session_data['type_id'] == '1') { ?>
 
                                         <li><a href="<?php echo $this->config->base_url(); ?>employee/deal"><i class="fa fa-share" aria-hidden="true"></i>طلبات الصفقات</a></li>
@@ -119,25 +130,31 @@
 
 
 
-                    <li>
-                        <a href="#"><i class="fa fa-info" aria-hidden="true"></i><span>المسمي الوظيفي</span></a>
-                    </li> 
-
+                    
+                    <?php if( $session_data['type_id'] == '3'){?>
                     <li>
                         <a href="<?php echo $this->config->base_url(); ?>employee/loadwork"><i class="fa fa-sitemap" aria-hidden="true"></i><span>توزيع الطلبات</span></a>
                     </li>
-                    <li>
-                        <a href="<?php echo $this->config->base_url(); ?>employee/Department"><i class="fa fa-list-ul" aria-hidden="true"></i><span>الاقسام	</span></a>
-                    </li>
+                    <?php }?>
                     <?php if ($session_data['type_id'] == '1' || $session_data['type_id'] == '2' || $session_data['type_id'] == '3') { ?>
 
                         <li>
                             <a href="#"><i class="fa fa-eyedropper" aria-hidden="true"></i>
                                 <span>طلب إذن </span></a>
                         </li>
-                    <?php } ?>
-                    <li><a href="#"><i class="fa fa-info" aria-hidden="true"></i><span>المسمي الوظيفي</span></a>
-                    </li>
+                        <?php } ?>
+                        <?php //print_r($session_data);?>
+                        <?php if ($session_data['type_id']=='4'){?>
+                        <li>
+                            <a href="<?php echo $this->config->base_url(); ?>employee/pendingRequestsSales"><i class="fa fa-eyedropper" aria-hidden="true"></i>
+                                <span>الطلبات المعلقه </span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-eyedropper" aria-hidden="true"></i>
+                                <span>الطلبات الجاريه </span></a>
+                        </li>
+                     <?php } ?>
+                        
                 </ul>
             </div>
         </div>

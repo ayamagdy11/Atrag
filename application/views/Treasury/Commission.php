@@ -3,7 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>الزيادات</title>
-        <?php $this->load->view('Header'); ?>
+        <link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/bootstrap.min.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.theme.css" rel="stylesheet">
+		<link type="text/css"href="<?php echo $this->config->base_url(); ?>_/css/jquery-ui.structure.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/font-awesome.css" rel="stylesheet">
+		<link href="<?php echo $this->config->base_url(); ?>_/css/style.css" rel="stylesheet">
     </head>
     <body>
         <!------------------------Add Discount---------------->
@@ -96,15 +102,23 @@
         <!--------------------------------------------------------------menubar---------------------------------------->
         <div class="menubar">
             <div class="row">
-                <div class="toolbar"><i class="fa fa-bell" aria-hidden="true"></i></div>
+               <?php $this->load->view('toolbar'); ?>
+                                         <div class="topbardiscount">
+			
+      <h3>الزيادات</h3><i class="fa fa-eyedropper" aria-hidden="true"></i>
+</div>
                 <div class="col-md-2 col-md-offset-10 ">
                     <?php $this->load->view('MenuBar') ?>
+                                           <div class="topbardiscount">
+			
+<i class="fa fa-eyedropper" aria-hidden="true"></i>
+</div>
                 </div>
 
                 <div class=" col-md-10 details">
-                    <h3>الزيادات</h3>
+              
                     <button class="btn btn-default addbtn" data-toggle='modal' data-target="#AddDiscount">أضف زياده</button>
-                    <form id="SearchForm" class="col-md-7 col-md-offset-4 col-sm-12 col-xs-12">
+                    <form id="SearchForm" class="col-md-5 col-md-offset-4 col-sm-12 col-xs-12">
                         <div class="row">
                             <div class="SearhDiv form-group formLayout col-md-9 col-sm-12 col-xs-12 ">
                                 <span class="Inputspan fa fa-search"></span>
@@ -143,8 +157,16 @@
 
         <!--------------------------------------------------------------/menubar---------------------------------------------------------------->
 
-        <?php $this->load->view('Scripts'); ?>
-
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.11.1.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-1.10.2.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery.validate.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-2.1.1.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/jquery-ui.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/bootstrap.min.js"></script>
+<script src="<?php echo $this->config->base_url(); ?>_/js/sarah.js"></script> 
+<script src="<?php echo $this->config->base_url(); ?>_/js/Atrag.js"></script>
     </body>
 </html>
 
