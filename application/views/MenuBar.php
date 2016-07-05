@@ -69,6 +69,21 @@
                                     </ul>
                                 </li>
                             <?php } ?>
+                                                                    <?php if ($session_data['type_id'] == '1') { ?>
+
+                                
+                                <li id="menu-home" ><a href="<?php echo $this->config->base_url(); ?>requests/salesMangerRequest">
+                                        <i class="fa fa-home"></i>
+                                        <div class="mail">
+                                        <span>طلبات مدير المبيعات<?php 
+                                        foreach ($this->session->userdata('count') as $row){
+                                            echo($row);
+                                        }?>
+                                        
+                                        </span></a>
+                                    </div>
+                    </li>
+                                                                    <?php }?>
                             <li><a href="#"><i class="fa fa-share-alt"></i><span>طلبات العملاء</span>
                                     <div id="omla" class="mails"><?php
                                         if ($session_data['type_id'] == '4') {
@@ -89,12 +104,8 @@
                                     <li><a href="<?php echo $this->config->base_url(); ?>employee/demandsform"><i class="fa fa-reply" aria-hidden="true"></i>طلبات </a></li>
                                         
                                         <?php }?>
+                                 
                                     
-                                    <?php if ($session_data['type_id'] == '1') { ?>
-                                         <li><a href="<?php echo $this->config->base_url(); ?>employee/salesMangerRequest"><i class="fa fa-share" aria-hidden="true"></i>طلبات مدير المبيعات</a></li>
-
-                                    
-                                    <?php}?> 
                                     <?php if ($session_data['type_id'] == '1') { ?>
 
                                         <li><a href="<?php echo $this->config->base_url(); ?>employee/deal"><i class="fa fa-share" aria-hidden="true"></i>طلبات الصفقات</a></li>

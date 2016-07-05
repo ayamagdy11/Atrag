@@ -493,7 +493,13 @@ class employee extends CI_Controller {
 //        }
     }
     
+    public function pendingRequestsSales(){
+        
+        
+        
+    }
 
+    
     public function editCommission() {
         $id = $this->input->post('id');
         $_overTime = $this->input->post('overtime_time');
